@@ -1,0 +1,19 @@
+{
+  "name": "team-project-1",
+  "version": "1.0.0",
+  "description": "A Cinema System for an assignment in Computer Science.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronbonnerATU/Team-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronbonnerATU/Team-Project/issues"
+  },
+  "homepage": "https://github.com/aaronbonnerATU/Team-Project#readme"
+}
