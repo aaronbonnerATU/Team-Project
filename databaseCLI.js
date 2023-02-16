@@ -18,12 +18,15 @@ function mainLoop() {
         console.log("**********************")
         console.log("*  CINEMA SQL TEST   *")
         console.log("**********************")
+        //Oskar: 1, 2, 3
         console.log("1. Search Films");
         console.log("2. Book Ticket");
         console.log("3. View Schedule");
+        //Aaron: 4, 5, 6
         console.log("4. Create Schedule");
         console.log("5. Change Schedule");
         console.log("6. Delete Screening");
+        //Michael: 7, 8, and 9.
         console.log("7. Create Film");
         console.log("8. Change Film");
         console.log("9. View Films");
