@@ -151,4 +151,70 @@ db.close((err) => {
 
 mainLoop();
 
-//b
+//Aarons Functions comment out if needed
+function createSchedule(){
+    let year = readlineSync.question("Add a year for schedule(q to Quit): ", { min: 2023, max: 2025 });
+    if(year == "q"){
+        return;
+    }
+
+    let month = readlineSync.question("Add a month for schedule(q to Quit): ",{ min: 1, max: 12 });
+    if(month == "q"){
+        return;
+    }
+
+    let date = readlineSync.question("Add a date for schedule(q to Quit):",{ min: 1, max: 31 } );
+    if(date =="q"){
+        return;
+    }
+
+    
+    db.serialize(function()  {
+      db.run("CREATE TABLE IF NOT EXISTS mytable (id INTEGER PRIMARY KEY, year INT , month INT, date INT)",function (err){
+        if(err){
+            console.log(err.message);
+        }
+      });
+      db.run("INSERT INTO mytable VALUES (?,?,?,?)", [year,month,date], function (err){
+        if(err){
+            console.log(err.message);
+        }
+      });
+    }
+    );
+    
+    // db.all("SELECT * FROM mytable", function(_err, rows) {
+    //   rows.forEach(function (row) {
+    //     console.log(row.date1);
+    //   });
+    //  });
+    }
+
+
+function changeSchedule(createSchedule){
+    const changedDate = new createSchedule()
+    changedDate.setDate('January 3,2023 13:00:00')
+
+    db.serialize(() => {
+        db.run("CREATE TABLE IF NOT EXISTS mytable (id INTEGER PRIMARY KEY, date1 TEXT)");
+        db.run("INSERT INTO mytable (changedDate) VALUES (changedDate)");
+      //   db.run("INSERT INTO mytable (name, age) VALUES ('Jane', 20)");
+        }
+      );
+      
+      db.all("SELECT * FROM mytable", function(_err, rows) {
+        rows.forEach(function (row) {
+          console.log(row.changedDate);
+        });
+       });
+
+
+
+}
+function deleteScreening(){
+    db.all("DELETE FROM mytable",function(_err,rows) {
+        console.log("The row that was deleted: " + result.affectedRows);
+    });
+
+    }
+
