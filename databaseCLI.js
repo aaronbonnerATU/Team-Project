@@ -74,7 +74,7 @@ function mainLoop() {
         }
     }
 }
-
+ 
 function createFilm() { //Lets the user input in a film's details to add to the database.
 
     //Read in title
