@@ -257,11 +257,12 @@ mainLoop();
 
 //Aarons Functions comment out if needed
 function createSchedule(){
+    //asking the user to create a year for the schedule
     let year = readlineSync.questionInt("Add a year for schedule(q to Quit): ", { min: 2023, max: 2025 });
     if(year == "q"){
         return;
     }
-
+    //asking the user to create a month for the schedule
     let month = readlineSync.questionInt("Add a month for schedule(q to Quit): ",{ min: 1, max: 12 });
     if(month == "q"){
         return;
@@ -277,9 +278,9 @@ function createSchedule(){
     if (lastRow.length > 0) {
         scheduleID = 1 + lastRow[0].id;
     }
-
+    //adding those values into a DATE value 
     let scheduleDate = (new Date(year, month-1)).toISOString().slice(0,10);
- 
+    //inserting the DATE oblect into the database
     db.prepare("INSERT INTO schedules VALUES (?,?)").run(scheduleID, scheduleDate);
     
     //console.table(db.prepare("select * from schedules").all());
@@ -306,7 +307,7 @@ function changeSchedule(){
         console.log("Invalid ID!");
         return;
     }
-    //Modify the monnth of that schedule
+    //Modify the month of that schedule
     let month = readlineSync.question("Month(blank to leave the same, q to quit):");
     if(month === "0"){
         return;
@@ -315,7 +316,7 @@ function changeSchedule(){
 
     }
 
-        //Modify the year of that schedule
+    //Modify the year of that schedule
     //Modify the year.
     let year = readlineSync.questionInt("Year(blank to stay same): ", { min: 1900, max: 3000 });
     if (year !== "") {
@@ -325,18 +326,18 @@ function changeSchedule(){
 
 
 
-    db.serialize(() => {
-        db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, date1 TEXT)").run();
-        db.prepare("INSERT INTO schedules (changedDate) VALUES (changedDate)").run();
+    // db.serialize(() => {
+    //     db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, date1 TEXT)").run();
+    //     db.prepare("INSERT INTO schedules (changedDate) VALUES (changedDate)").run();
       
-        }
-      );
+    //     }
+    //   );
       
-      db.all("SELECT * FROM schedules", function(_err, rows) {
-        rows.forEach(function (row) {
-          console.table(row.changedDate);
-        });
-       });
+    //   db.all("SELECT * FROM schedules", function(_err, rows) {
+    //     rows.forEach(function (row) {
+    //       console.table(row.changedDate);
+    //     });
+    //    });
 
 
 
