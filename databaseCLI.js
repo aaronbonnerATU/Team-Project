@@ -9,7 +9,7 @@ console.log('Connected to the in-memory SQlite database.');
 
 function mainLoop() {
     db.prepare("CREATE TABLE IF NOT EXISTS films (filmID INT, title VARCHAR(100), year INT, rating VARCHAR(3), description VARCHAR)").run();
-    db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, year INT , month INT, date INT)").run();
+    db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, startdate DATE)").run();
     //All commands will have th efollowing structure in a function:
     while (true) { //1. WHile true loop
 
@@ -257,57 +257,69 @@ mainLoop();
 
 //Aarons Functions comment out if needed
 function createSchedule(){
-    let year = readlineSync.question("Add a year for schedule(q to Quit): ", { min: 2023, max: 2025 });
+    let year = readlineSync.questionInt("Add a year for schedule(q to Quit): ", { min: 2023, max: 2025 });
     if(year == "q"){
         return;
     }
 
-    let month = readlineSync.question("Add a month for schedule(q to Quit): ",{ min: 1, max: 12 });
+    let month = readlineSync.questionInt("Add a month for schedule(q to Quit): ",{ min: 1, max: 12 });
     if(month == "q"){
         return;
     }
 
-    let date = readlineSync.question("Add a date for schedule(q to Quit):",{ min: 1, max: 31 } );
-    if(date =="q"){
-        return;
+    // let date = readlineSync.question("Add a date for schedule(q to Quit):",{ min: 1, max: 31 } );
+    // if(date =="q"){
+    //     return;
+    // }
+
+    let lastRow = db.prepare("SELECT * FROM schedules ORDER BY id DESC LIMIT 1").all()
+    let scheduleID = 0;
+    if (lastRow.length > 0) {
+        scheduleID = 1 + lastRow[0].id;
     }
 
-    db.serialize(function()  {
-      db.run("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, year INT , month INT, date INT)",function (err){
-        if(err){
-            console.log(err.message);
-        }
-      });
-      db.run("INSERT INTO schedules VALUES (?,?,?,?)", [year,month,date], function (err){
-        if(err){
-            console.log(err.message);
-        }
-      });
-    }
-    );
+    let scheduleDate = (new Date(year, month-1)).toISOString().slice(0,10);
+ 
+    db.prepare("INSERT INTO schedules VALUES (?,?)").run(scheduleID, scheduleDate);
     
+    //console.table(db.prepare("select * from schedules").all());
     // db.all("SELECT * FROM schedules", function(_err, rows) {
     //   rows.forEach(function (row) {
     //     console.log(row.date1);
     //   });
     //  });
-    }
+}    
 
 
 function changeSchedule(createSchedule){
-    const changedDate = new createSchedule()
-    changedDate.setDate('January 3,2023 13:00:00')
+    let noOfSchedules = viewSchedule();
+    //if there is no schedules to modify
+    if(noOfSchedules == 0){
+        console.log("There are no schedules to modify");
+        return;
+    }
+    //get the schedule from the user
+    let scheduleID = readlineSync.questionInt("Schedule ID to modify :");
+    
+    if(db.prepare("select scheduleID from schedule where scheduleID = ?").all(scheduleID).length !== 1){
+        console.log("Invalid ID!");
+        return;
+    }
+    //Modify the monnth of that schedule
+    let month = red
+
+
 
     db.serialize(() => {
-        db.run("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, date1 TEXT)");
-        db.run("INSERT INTO schedules (changedDate) VALUES (changedDate)");
-      //   db.run("INSERT INTO schedules (name, age) VALUES ('Jane', 20)");
+        db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, date1 TEXT)").run();
+        db.prepare("INSERT INTO schedules (changedDate) VALUES (changedDate)").run();
+      
         }
       );
       
       db.all("SELECT * FROM schedules", function(_err, rows) {
         rows.forEach(function (row) {
-          console.log(row.changedDate);
+          console.table(row.changedDate);
         });
        });
 
@@ -316,7 +328,7 @@ function changeSchedule(createSchedule){
 }
 function deleteScreening(){
     db.all("DELETE FROM schedules",function(_err,rows) {
-        console.log("The row that was deleted: " + result.affectedRows);
+        console.table("The row that was deleted: " + result.affectedRows);
     });
 
 }
