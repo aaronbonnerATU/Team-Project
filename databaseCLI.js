@@ -291,8 +291,9 @@ function createSchedule(){
 }    
 
 
-function changeSchedule(createSchedule){
-    let noOfSchedules = viewSchedule();
+function changeSchedule(){
+    //let noOfSchedules = viewSchedule();
+    let noOfSchedules = db.prepare("SELECT COUNT(id) FROM schedules").all()[0]["COUNT(id)"];
     //if there is no schedules to modify
     if(noOfSchedules == 0){
         console.log("There are no schedules to modify");
@@ -306,7 +307,21 @@ function changeSchedule(createSchedule){
         return;
     }
     //Modify the monnth of that schedule
-    let month = red
+    let month = readlineSync.question("Month(blank to leave the same, q to quit):");
+    if(month === "0"){
+        return;
+    } else if(month !== ""){
+        db.prepare("update schedules set month = ? where scheduleID = ?").run(month,scheduleID);
+
+    }
+
+        //Modify the year of that schedule
+    //Modify the year.
+    let year = readlineSync.questionInt("Year(blank to stay same): ", { min: 1900, max: 3000 });
+    if (year !== "") {
+        db.prepare("update films set year = ? where scheduleID = ?").run(year, filmID);
+    }
+
 
 
 
