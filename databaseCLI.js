@@ -10,6 +10,7 @@ console.log('Connected to the in-memory SQlite database.');
 function mainLoop() {
     db.prepare("CREATE TABLE IF NOT EXISTS films (filmID INT, title VARCHAR(100), year INT, rating VARCHAR(3), description VARCHAR)").run();
     db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, startdate DATE)").run();
+    db.prepare("CREATE TABLE IF NOT EXISTS tickets (screeningID INT, uuid BINARY(16))").run();
     //All commands will have th efollowing structure in a function:
     while (true) { //1. WHile true loop
 
@@ -81,67 +82,103 @@ function mainLoop() {
 
 function searchFilms(){//Seaches for the films that include whatever you type into the question thing
     
-    let title = readlineSync.question("Movie Title(0 to cancel):");
-    if (title === "0") {
-        return;
-    }
+    console.log("******************");
+    console.log("|1. Title        |");
+    console.log("|2. Rating       |");
+    console.log("|3. Year         |");
+    console.log("|4. Description  |");
+    console.log("******************");
 
-    //no sql injection lmao
-    const listOfFilms = db.prepare("SELECT * FROM films WHERE title LIKE '%'||?||'%'").all(title);
+    let num = readlineSync.question("What do you want to search for the movie by?:");
+
+    let listOfFilms=[];
+
+    switch(num){
+        case "1": 
+            let title = readlineSync.question("Title(0 to cancel):");
+            if (title === "0") {
+                return;
+            }
+            listOfFilms = db.prepare("SELECT * FROM films WHERE title LIKE '%'||?||'%'").all(title);//no sql injection lmao
+            break;   
+        case "2":
+            const RATINGS = ["G", "PG", "12A", "15A", "16", "18"];
+            let rating = readlineSync.keyInSelect(RATINGS, "Rating(0 to cancel):"); 
+            if (rating === "0") {
+                return;
+            }
+            listOfFilms = db.prepare("SELECT * FROM films WHERE rating LIKE '%'||?||'%'").all(rating);//no sql injection lmao
+            break;
+        case "3":
+            let year = readlineSync.question("Year(0 to cancel):");
+            if (year === "0") {
+                return;
+            }
+            listOfFilms = db.prepare("SELECT * FROM films WHERE rating LIKE '%'||?||'%'").all(year);//no sql injection lmao
+            break;
+        case "4":
+            let description = readlineSync.question("Description(0 to cancel):");
+            if (description === "0") {
+                return;
+            }
+            listOfFilms = db.prepare("SELECT * FROM films WHERE rating LIKE '%'||?||'%'").all(description);//no sql injection lmao
+            break;
+    }
     
     //displays stuff
     console.table(listOfFilms);
 
 }
 
-function bookTicket(){//lets you book one or more tickets(if you dont got no game)
+function bookTicket(){//lets you book one(if you got no game) or more tickets 
 
     let title = readlineSync.question("What movie do you want to book a tickt for(0 to cancel)?: ");
     if(title === "0"){
         return;
     }
 
-    let year = readlineSync.questionInt("Year (0 to cancel):");
-    if (year === 0) {
+    let year = readlineSync.questionInt("Add a year for schedule(q to Quit): ", { min: 2023, max: 2025 });
+    if(year == "q"){
         return;
     }
 
-    let month = readlineSync.questionInt("Month (0 to cancel):");
-    if (month === 0) {
+    let month = readlineSync.questionInt("Add a month for schedule(q to Quit): ",{ min: 1, max: 12 });
+    if(month == "q"){
         return;
     }
 
-    let date = readlineSync.questionInt("Date (0 to cancel):");
-    if (date === 0) {
-        return;
-    }
+    let scheduleDate = (new Date(year, month-1)).toISOString().slice(0,10);
     
     let numberOfTickets = readlineSync.questionInt("How many tickets do you want to buy(0 to cancel)?: ");
+
     if(title === 0){
         return;
     }
 
-    //
-    db.prepare("SELECT * FROM ").run();
+    for(let x = 0; x < numberOfTickets; x++){
+        db.prepare("INSERT INTO tickets VALUES (?,NEWID())").run(0);
+    }
+    //const list = db.prepare("SELECT price, _(emptySeats)_ FROM screening scr, schedule sch WHERE title=? AND date=?").run(title, scheduleDate);
+
+    console.log(list);
 }
 
-function viewSchedule(){
-    let year = readlineSync.questionInt("Year (0 to cancel):");
-    if (year === 0) {
+function viewSchedule(){//view schedule, as the name implies, you dumbo //not implemented yet because we dont have screenings implemented. dumbo
+    
+    //Asks user for date
+    let year = readlineSync.questionInt("Add a year for schedule(q to Quit): ", { min: 2023, max: 2025 });
+    if(year == "q"){
         return;
     }
 
-    let month = readlineSync.questionInt("Month (0 to cancel):");
-    if (month === 0) {
+    let month = readlineSync.questionInt("Add a month for schedule(q to Quit): ",{ min: 1, max: 12 });
+    if(month == "q"){
         return;
     }
 
-    let date = readlineSync.questionInt("Date (0 to cancel):");
-    if (date === 0) {
-        return;
-    }
+    let scheduleDate = (new Date(year, month-1)).toISOString().slice(0,10);
 
-    let schedule = db.prepare("SELECT * FROM schedules WHERE year=? AND month=? AND date=?").run(year,month,date);
+    let schedule = db.prepare("SELECT * FROM schedules WHERE date=?").run(scheduleDate);
 
     console.table(schedule);
 }
