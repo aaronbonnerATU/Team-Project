@@ -1,7 +1,6 @@
 console.log("Hello World! :D");
 
 const Database = require('better-sqlite3');
-
 const readlineSync = require("readline-sync")
 
 let db = new Database(':memory:', {verbose: console.log });
