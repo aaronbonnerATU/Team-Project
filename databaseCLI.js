@@ -10,6 +10,7 @@ console.log('Connected to the in-memory SQlite database.');
 
 function mainLoop() {
     db.prepare("CREATE TABLE IF NOT EXISTS films (filmID INT, title VARCHAR(100), year INT, rating VARCHAR(3), description VARCHAR)").run();
+    db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, year INT , month INT, date INT)").run();
     //All commands will have th efollowing structure in a function:
     while (true) { //1. WHile true loop
 
@@ -74,7 +75,78 @@ function mainLoop() {
         }
     }
 }
- 
+
+//searchFilms()
+//bookTicket()
+//viewSchedule()
+
+function searchFilms(){//Seaches for the films that include whatever you type into the question thing
+    
+    let title = readlineSync.question("Movie Title(0 to cancel):");
+    if (title === "0") {
+        return;
+    }
+
+    //no sql injection lmao
+    const listOfFilms = db.prepare("SELECT * FROM films WHERE title LIKE '%'||?||'%'").all(title);
+    
+    //displays stuff
+    console.table(listOfFilms);
+
+}
+
+function bookTicket(){//lets you book one or more tickets(if you dont got no game)
+
+    let title = readlineSync.question("What movie do you want to book a tickt for(0 to cancel)?: ");
+    if(title === "0"){
+        return;
+    }
+
+    let year = readlineSync.questionInt("Year (0 to cancel):");
+    if (year === 0) {
+        return;
+    }
+
+    let month = readlineSync.questionInt("Month (0 to cancel):");
+    if (month === 0) {
+        return;
+    }
+
+    let date = readlineSync.questionInt("Date (0 to cancel):");
+    if (date === 0) {
+        return;
+    }
+    
+    let numberOfTickets = readlineSync.questionInt("How many tickets do you want to buy(0 to cancel)?: ");
+    if(title === 0){
+        return;
+    }
+
+    //
+    db.prepare("SELECT * FROM ").run();
+}
+
+function viewSchedule(){
+    let year = readlineSync.questionInt("Year (0 to cancel):");
+    if (year === 0) {
+        return;
+    }
+
+    let month = readlineSync.questionInt("Month (0 to cancel):");
+    if (month === 0) {
+        return;
+    }
+
+    let date = readlineSync.questionInt("Date (0 to cancel):");
+    if (date === 0) {
+        return;
+    }
+
+    let schedule = db.prepare("SELECT * FROM schedules WHERE year=? AND month=? AND date=?").run(year,month,date);
+
+    console.table(schedule);
+}
+
 function createFilm() { //Lets the user input in a film's details to add to the database.
 
     //Read in title
@@ -202,12 +274,12 @@ function createSchedule(){
     }
 
     db.serialize(function()  {
-      db.run("CREATE TABLE IF NOT EXISTS mytable (id INTEGER PRIMARY KEY, year INT , month INT, date INT)",function (err){
+      db.run("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, year INT , month INT, date INT)",function (err){
         if(err){
             console.log(err.message);
         }
       });
-      db.run("INSERT INTO mytable VALUES (?,?,?,?)", [year,month,date], function (err){
+      db.run("INSERT INTO schedules VALUES (?,?,?,?)", [year,month,date], function (err){
         if(err){
             console.log(err.message);
         }
@@ -215,7 +287,7 @@ function createSchedule(){
     }
     );
     
-    // db.all("SELECT * FROM mytable", function(_err, rows) {
+    // db.all("SELECT * FROM schedules", function(_err, rows) {
     //   rows.forEach(function (row) {
     //     console.log(row.date1);
     //   });
@@ -228,13 +300,13 @@ function changeSchedule(createSchedule){
     changedDate.setDate('January 3,2023 13:00:00')
 
     db.serialize(() => {
-        db.run("CREATE TABLE IF NOT EXISTS mytable (id INTEGER PRIMARY KEY, date1 TEXT)");
-        db.run("INSERT INTO mytable (changedDate) VALUES (changedDate)");
-      //   db.run("INSERT INTO mytable (name, age) VALUES ('Jane', 20)");
+        db.run("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, date1 TEXT)");
+        db.run("INSERT INTO schedules (changedDate) VALUES (changedDate)");
+      //   db.run("INSERT INTO schedules (name, age) VALUES ('Jane', 20)");
         }
       );
       
-      db.all("SELECT * FROM mytable", function(_err, rows) {
+      db.all("SELECT * FROM schedules", function(_err, rows) {
         rows.forEach(function (row) {
           console.log(row.changedDate);
         });
@@ -244,9 +316,8 @@ function changeSchedule(createSchedule){
 
 }
 function deleteScreening(){
-    db.all("DELETE FROM mytable",function(_err,rows) {
+    db.all("DELETE FROM schedules",function(_err,rows) {
         console.log("The row that was deleted: " + result.affectedRows);
     });
 
-    }
-
+}
