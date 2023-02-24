@@ -8,9 +8,9 @@ let db = new Database(':memory:', {verbose: console.log });
 console.log('Connected to the in-memory SQlite database.');
 
 function mainLoop() {
-    db.prepare("CREATE TABLE IF NOT EXISTS films (filmID INT, title VARCHAR(100), year INT, rating VARCHAR(3), description VARCHAR)").run();
-    db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, startdate DATE)").run();
-    db.prepare("CREATE TABLE IF NOT EXISTS tickets (screeningID INT, uuid BINARY(16))").run();
+    db.prepare("CREATE TABLE IF NOT EXISTS films (filmID INT PRIMARY KEY, title VARCHAR(100), year INT, rating VARCHAR(3), description VARCHAR)").run();
+    db.prepare("CREATE TABLE IF NOT EXISTS schedules (id INTEGER PRIMARY KEY, startdate DATE, UNIQUE(startdate))").run();
+    db.prepare("CREATE TABLE IF NOT EXISTS tickets (screeningID INT PRIMARY KEY, uuid BINARY(16))").run();
     //All commands will have th efollowing structure in a function:
     while (true) { //1. WHile true loop
 
@@ -318,7 +318,12 @@ function createSchedule(){
     //adding those values into a DATE value 
     let scheduleDate = (new Date(year, month-1)).toISOString().slice(0,10);
     //inserting the DATE oblect into the database
-    db.prepare("INSERT INTO schedules VALUES (?,?)").run(scheduleID, scheduleDate);
+
+    let result = db.prepare("INSERT OR IGNORE INTO schedules VALUES (?,?)").run(scheduleID, scheduleDate);
+
+    if (result.changes == 0){
+        console.log("Date already exists!");
+    }
     
     //console.table(db.prepare("select * from schedules").all());
     // db.all("SELECT * FROM schedules", function(_err, rows) {
@@ -344,7 +349,7 @@ function changeSchedule(){
         console.log("Invalid ID!");
         return;
     }
-    //Modify the month of that schedule
+    //Modify the month of that schedule, if it is does exist change schedule  
     let month = readlineSync.question("Month(blank to leave the same, q to quit):");
     if(month === "0"){
         return;
@@ -380,8 +385,27 @@ function changeSchedule(){
 
 }
 function deleteScreening(){
-    db.all("DELETE FROM schedules",function(_err,rows) {
-        console.table("The row that was deleted: " + result.affectedRows);
-    });
+
+    //asks the user what year needs to be deleted
+    let year = readlineSync.questionInt("Delete a year for schedule(q to Quit): ", { min: 2023, max: 2025 });
+    if(year == "q"){
+        return;
+    }
+    //asking the user to delete a month for the schedule
+    let month = readlineSync.questionInt("Delete a month for schedule(q to Quit): ",{ min: 1, max: 12 });
+    if(month == "q"){
+        return;
+    }
+
+    //adding those values into a DATE value 
+    let scheduleDate = (new Date(year, month-1)).toISOString().slice(0,10);
+
+
+    //delete from the schedules table, and inform the user if no such schedule exists.
+    let result = db.prepare("DELETE from schedules where startdate  = ?").run(scheduleDate);
+    
+    if (result.changes == 0){
+        console.log("There are no schedules to delete");
+    }
 
 }
