@@ -2,7 +2,16 @@ console.log("Hello World! :D");
 
 const sqlite3 = require("sqlite3").verbose();
 
+let express = require('express');
+let app = express();
 
+app.get('/MOMA', function(req, res){
+   res.send("Cinema System");
+});
+
+app.listen(3000);
+
+//Database code
 let db = new sqlite3.Database(':memory:', (err) => {
 if (err) {
     return console.error(err.message);
@@ -32,3 +41,4 @@ console.log('Close the database connection.');
 
 
 //b
+
