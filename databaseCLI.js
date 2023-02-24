@@ -178,7 +178,7 @@ function viewSchedule(){//view schedule, as the name implies, you dumbo //not im
 
     let scheduleDate = (new Date(year, month-1)).toISOString().slice(0,10);
 
-    let schedule = db.prepare("SELECT * FROM schedules WHERE date=?").run(scheduleDate);
+    let schedule = db.prepare("SELECT * FROM schedules WHERE startdate=?").run(scheduleDate);
 
     console.table(schedule);
 }
