@@ -1,44 +1,30 @@
-console.log("Hello World! :D");
+let slideshow =1;
+showSlides(slideIndex);
 
-const sqlite3 = require("sqlite3").verbose();
-
-let express = require('express');
-let app = express();
-
-app.get('/MOMA', function(req, res){
-   res.send("Cinema System");
-});
-
-app.listen(3000);
-
-//Database code
-let db = new sqlite3.Database(':memory:', (err) => {
-if (err) {
-    return console.error(err.message);
+//Next/Previous control
+function plusSlides(n) {
+    showSlides(slideIndex +=n);
 }
-console.log('Connected to the in-memory SQlite database.');
-  });
 
-db.serialize(() => {
-  db.run("CREATE TABLE IF NOT EXISTS mytable (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)");
-  db.run("INSERT INTO mytable (name, age) VALUES ('John', 30)");
-  db.run("INSERT INTO mytable (name, age) VALUES ('Jane', 20)");
-  }
-);
-
-db.all("SELECT * FROM mytable", function(err, rows) {
-  rows.forEach(function (row) {
-    console.log(row.id + ": " + row.name + " (" + row.age + ")");
-  });
- });
-
-db.close((err) => {
-if (err) {
-    return console.error(err.message);
+//Thumbnail image controls
+function currentSlide(n) {
+    showSlides(slideIndex = n)
 }
-console.log('Close the database connection.');
-});
 
+function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if(n>slides.legnth) {slideIndex =1}
+    if(n<1) {slideIndex =slides.length}
+    for(i=0;i<slides.length; i++) {
+        slides[i].getElementsByClassName.display ="none";
+        
+    }
 
-//b
-
+    for(i=0; i<dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "")
+    }
+    slides[slideIndex-1].getElementsByClassName.display = "block";
+    dots[slideIndex-1].className+=" active";
+}
