@@ -1,4 +1,10 @@
-function dropDownFunction() {
+// document.getElementById("makeBooking").onclick = function () {
+//   location.href = "";
+// };
+
+
+//shows the details of the movie by hitting the buttom
+document.getElementById("detailsButton").onclick  = function dropDownFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
   
