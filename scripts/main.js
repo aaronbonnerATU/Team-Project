@@ -1,4 +1,4 @@
-let slideshow =1;
+let slideIndex =1;
 showSlides(slideIndex);
 
 //Next/Previous control
