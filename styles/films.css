@@ -1,0 +1,83 @@
+@import "main.css";
+
+.SCREEN {
+  text-align:center;
+  font-size:40px;
+  font-family:sans-serif;
+}
+
+#filmList{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.filmContainer {
+  align-self: center;
+  border-bottom: 5px solid rgb(0, 0, 0);
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.filmImg {
+  margin: 20px;
+  width: 180px;
+  height: auto;
+}
+
+.filmTitle {
+  letter-spacing:0.2em;
+  font-family:avenir-lt-w01_85-heavy1475544,sans-serif;
+  font-size:20px;
+  font-weight: bold;
+  color: black;
+}
+
+.filmLength {
+  font-family:poppins-semibold,poppins,sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: rgb(137,168,5);
+}
+
+.filmSummary {
+  height: 6em;
+  font-family:avenir-lt-w01_35-light1475496,sans-serif;
+  font-size:16px;
+  font-weight: 100;
+  color: black;
+}
+
+.filmTrailerBtn {
+  width: 200px;
+  height: 40px;
+  font-family:'Times New Roman', Times, serif;
+  font-size:16px;
+  font-weight: 100;
+  background-color: rgb(27, 38, 97);
+  color: white;
+  box-shadow:0px 0px 0px 1px white inset;
+}
+
+.filmTrailerBtn:hover {
+  background-color: rgb(60, 76, 170);
+  color: white;
+  box-shadow:0px 0px 0px 1px rgb(253, 255, 230) inset;
+}
+
+#nowShowingBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  background-color: rgb(211, 211, 211);
+  color: black;
+  font-size: 20px;
+  font-family: sans-serif;
+}

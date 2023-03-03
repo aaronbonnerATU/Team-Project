@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinema</title>
-    <link rel= "stylesheet" href ="styles/style.css">
+    <title>Cinema</title>s
+    <link rel= "stylesheet" href ="styles/index.css">
 </head>
 <body>
     <div class="text">
     <h1>MOMA CINEMA</h1>
     </div>
-
     
     <ul class="links">
         <li><a href="https://www.w3schools.com/">Home</a></li>
@@ -49,16 +48,29 @@
     </div>
   
     <!-- Next and previous buttons -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <a id="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a id="next" onclick="plusSlides(1)">&#10095;</a>
+
+      <!-- The dots/circles -->
+  <div id="dotContainer">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+
   </div>
   <br>
   
-  <!-- The dots/circles -->
-  <div>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-    <span class="dot" onclick="currentSlide(1)"></span>
+
+
+  <div class="About_Us">
+    <div class="Header">
+    <h1>A Deeper Look</h1>
+  </div>
+    <p>MOMA is a culmination of compelling storytelling, excellent cinematography, and 
+      fantastic editing. With a stellar cast and award-winning crew, this upcoming release 
+      is bound to be a hit. Browse our site for trailers, exclusive videos, and information 
+      about where and when MOMA will be playing near you.</p>
   </div>
 </body>
 
