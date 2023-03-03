@@ -43,3 +43,13 @@
   .links li a:active {
     color: hotpink;
   }
+  
+
+  .Footer {
+    color:black;
+    text-align:center;
+    margin-inline:500px;
+    font-family:sans-serif;
+    margin-bottom:50px;
+    line-height: 1.8;
+  }
