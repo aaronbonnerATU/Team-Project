@@ -94,3 +94,8 @@ to{opacity: 1}
 }
 
 
+#dotContainer {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
