@@ -25,7 +25,15 @@ app.get('/', function (req, res) {
 });
 
 app.get('/films', function (req, res) {
-    let rows = db.prepare("select * from films").all();
+    let searchTerm = req.query.search;
+    console.log(searchTerm);
+    let rows;
+    if (searchTerm === undefined) {
+        rows = db.prepare("select * from films").all();
+    } else {
+        console.log(searchTerm);
+        rows = db.prepare("select * from films where (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
+    }
     console.table(rows);
     res.render("films", {films: rows});
 });
