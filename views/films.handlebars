@@ -1,18 +1,30 @@
         <link rel= "stylesheet" href ="styles/films.css">
 
-    </div>
+    <div class="topnav">
+        <div class="search-container">
+              <input type="text" placeholder="Search.." id="searchBar" type="search">
+              <button type="submit" id="searchBtn">Search</button>
+          </div>
+      </div>
 
     <div id="filmList">
-        {{#each films}}
-        <div class="filmContainer">
-            <img src="images/poster1.png" class="filmImg">
-            <div class="filmDescriptionContainer">
-                <p class="filmTitle">{{title}} ({{rating}})</p>
-                <p class="filmYear">{{year}}</p>
-
-                <p class="filmSummary">{{description}}</p>
-                <button class="filmTrailerBtn">View Trailer</button>
+        {{#if films}}
+            {{#each films}}
+            <div class="filmContainer">
+                <img src="images/poster1.png" class="filmImg">
+                <div class="filmDescriptionContainer">
+                    <p class="filmTitle">{{title}} ({{rating}})</p>
+                    <p class="filmYear">{{year}}</p>
+                    <p class="filmSummary">{{description}}</p>
+                    <button class="filmTrailerBtn">View Trailer</button>
+                </div>
             </div>
+            {{/each}}
+        {{else}}
+        <div class="filmContainer">
+            <p class="filmTitle">No results found</p>
         </div>
-        {{/each}}
+        {{/if}}
     </div>
+
+    <script src="scripts/films.js"></script>
