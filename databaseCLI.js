@@ -4,7 +4,8 @@ const Database = require('better-sqlite3');
 const readlineSync = require("readline-sync");
 const { v4: uuid } = require('uuid');
 
-let db = new Database(':memory:', {verbose: console.log });
+let db = new Database('filmDB.db', {verbose: console.log });
+db.pragma('journal_mode = WAL');
 
 console.log('Connected to the in-memory SQlite database.');
 
