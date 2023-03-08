@@ -4,12 +4,22 @@
 /* booking page css */
 
 .image {
+  display: flex;
   margin: 2%;
   width: 40%;
   height: auto;
   }
 
+  .imgRating {
+    display: flex;
+    margin: 20px;
+    width: 80px;
+      height: auto;
+    margin-right: auto;
+    }
+
   .detailsContainer {
+    max-width: 800px;
     align-self: center;
     border-bottom: 5px solid rgb(0, 0, 0);
     display: flex;
@@ -17,6 +27,13 @@
     justify-content: center;
     align-items: center;
     gap: 5%;
+  }
+
+
+  #detailsOuter {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
   }
   
   /* Button CSS*/
@@ -36,13 +53,18 @@
       background-color: #D3D3D3;
     }
 
-  .center {
-    margin: 0;
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, 80%);
+  .btncenter {
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .detailscenter {
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
   }
 
 
