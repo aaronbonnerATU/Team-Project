@@ -31,3 +31,39 @@
     font-weight: bold;
     color: black;
   }
+
+  .Coming_Soon {
+    text-align:center;
+    margin: 5px;
+    background-color: rgb(27, 38, 97);
+    color:aliceblue;
+    overflow: hidden;
+    font-family: sans-serif;
+
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .Footer {
+    color:black;
+    text-align:center;
+    margin-inline:500px;
+    font-family:sans-serif;
+    margin-bottom:50px;
+    line-height: 1.8;
+  }
