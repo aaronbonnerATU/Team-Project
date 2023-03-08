@@ -82,13 +82,14 @@ app.get('/ticket', function (req, res) {
         });
 });
 
-
 app.post('/submit-login-data', function (req, res) {
-   let name = req.body.username + ' ' + req.body.password;
+    let name = req.body.username + ' ' + req.body.password;
     
     res.send(name + ' Submitted Successfully!');
 });
 
+//-------------------------------------------
+//code for admin panel
 app.post('/add-new-movie', function(req, res){
     let lastRow = db.prepare("SELECT * FROM films ORDER BY filmID DESC LIMIT 1").all()
     let filmID = 0;
@@ -105,6 +106,52 @@ app.post('/delete-movie', function(req, res){
     db.prepare("DELETE FROM films WHERE title=?1 or filmID=?1").run({1:req.body.movieDelete});
     console.table(req.body);
 });
+//---------------------------
+
+//---------------------------
+//code for management panel
+app.post('/de-re-comission-screen', function (req, res){
+
+    console.log(req.body.booScreen);
+
+    const check = db.prepare("SELECT decomissioned FROM rooms WHERE roomID=?").all(req.body.booScreen);
+    
+    console.log(check);
+    if(0 === check[0].decomissioned){
+        db.prepare("UPDATE rooms SET decomissioned=1 WHERE roomID=?").run(req.body.booScreen);
+    }
+    else{
+        db.prepare("UPDATE rooms SET decomissioned=0 WHERE roomID=?").run(req.body.booScreen);
+    }
+
+    
+    let result = db.prepare("SELECT * FROM rooms WHERE roomID=?1").all({1:req.body.booScreen});
+    console.table(result);
+    console.log(result);
+});
+
+app.post('/add-new-movie', function(req, res){
+    let lastRow = db.prepare("SELECT * FROM screenings ORDER BY screeningID DESC LIMIT 1").all()
+    let screeningID = 0;
+    if (lastRow.length > 0) {
+        screeningID = 1 + lastRow[0].screeningID;
+    }
+
+    console.table(req.body);
+
+    //if(){
+    //    db.prepare("INSERT INTO films VALUES (?,?,?,?,?)").run(filmID, req.body.title, req.body.year, req.body.rating, req.body.description);
+    //}
+});
+
+app.post('/delete-movie', function(req, res){
+    db.prepare("DELETE FROM films WHERE title=?1 or filmID=?1").run({1:req.body.movieDelete});
+    console.table(req.body);
+});
+
+
+
+//------------------------------
 
 let server = app.listen(5000, function () {
     console.log('Node server is running..');
