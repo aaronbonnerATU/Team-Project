@@ -1,0 +1,33 @@
+.movieRow{
+    display:flex;
+    flex-direction:row;
+    text-align:center;
+    margin-top:10px;
+}
+
+.movieDisp11{
+    width:80px;
+    background-color: rgb(115, 115, 115);
+}
+
+.movieDisp12{
+    width:80px;
+    background-color: rgb(130, 130, 130);
+}
+
+.movieDisp21{
+    width:80px;
+    background-color: rgb(155, 155, 155);
+}
+
+.movieDisp22{
+    width:80px;
+    background-color: rgb(170, 170, 170);
+}
+
+.line{
+    width:638px;
+    height:1px;
+    margin:0px;
+}
+
