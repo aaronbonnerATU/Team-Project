@@ -7,11 +7,30 @@
     <title>Management Panel</title>
 </head>
 <body>
-    <div>
-        <h1>Cinema System - Administrator Panel</h1>
+    <h1>Cinema System - Management Panel</h1>
     
+    <div>
+        <form action="/de-re-comission-screen" method="POST">
+            <label for="booScreen">Which screen do you want to decomission?: </label>
+            <input id="booScreen" name="booScreen" type="text">
+            <input type="submit">
+        </form>
+    </div>
 
-        
+    <div>
+        <form action="/add-screening" method="POST">
+            <label for="filmIDINP">Film(ID): </label>
+            <label for="roomIDINP">Room: </label>
+            <label for="dateINP">Date: </label>
+            <label for="timeINP">Time: </label>
+            
+            <input id="filmIDINP" name="filmID" type="text">
+            <input id="roomIDINP" name="roomID" type="text">
+            <input id="dateINP" name="date" type="text">
+            <input id="timeINP" name="time" type="text">
+
+            <input type="submit">
+        </form>
     </div>
 
 </body>
