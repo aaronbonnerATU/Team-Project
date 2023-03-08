@@ -40,9 +40,17 @@ app.get('/book', function (req, res) {
 
     film = db.prepare("select * from films where filmid = ?").all(filmID);
     if (film.length === 0) {
-        res.redirect("/");
+        res.send("Error: Film not found.");
         return;
     }
+
+    screenings = db.prepare("select * from screenings where filmid = ?").all(filmID);
+    if (screenings.length === 0) {
+        //res.send("Error: No screenings for this film.");
+        //return;
+    }
+
+    //res.send(screenings);
 
     res.render("booking", film[0]);
 });
