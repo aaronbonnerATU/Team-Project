@@ -89,6 +89,22 @@ app.post('/submit-login-data', function (req, res) {
     res.send(name + ' Submitted Successfully!');
 });
 
+app.post('/add-new-movie', function(req, res){
+    let lastRow = db.prepare("SELECT * FROM films ORDER BY filmID DESC LIMIT 1").all()
+    let filmID = 0;
+    if (lastRow.length > 0) {
+        filmID = 1 + lastRow[0].filmID;
+    }
+
+    console.table(req.body);
+
+    db.prepare("INSERT INTO films VALUES (?,?,?,?,?)").run(filmID, req.body.title, req.body.year, req.body.rating, req.body.description);
+});
+
+app.post('/delete-movie', function(req, res){
+    db.prepare("DELETE FROM films WHERE title=?").run(req.body.movieDelete);
+    console.table(req.body);
+});
 let server = app.listen(5000, function () {
     console.log('Node server is running..');
 });
