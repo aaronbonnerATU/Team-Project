@@ -1,25 +1,15 @@
-    <div class="text">
-        <h1>MOMA CINEMA</h1>
-        </div>
-    
-        <div id="viewTicketBanner">
-          <h1>View Ticket</h1>
-        </div>
-    
-        <ul class="links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="">Schedule</a></li>
-            <li><a href="films.html">Films</a></li>
-            <li><a href="booking.html">Book Online</a></li>
-            <li><a href="">Plan and Pricing</a></li>
-            <li><a href="">Contact</a></li>
-        </ul>
+
+    <link rel= "stylesheet" href ="styles/viewticket.css">
+
+    <div id="viewTicketBanner">
+        <h1>View Ticket</h1>
+    </div>
+
     <div class="viewticketContainer">
         <div class="center">
-            <p class="filmTitle">Avengers Endgame</p>
-            <p class="ticketDate">10 March 2023</p>
-            <p class="filmLength">180 Minutes</p>
+            <p class="filmTitle">{{title}}</p>
+            <p class="ticketDate">{{date}}</p>
             <p class="filmTitle"><b>Seat:</b>A6</p>
-            <div id="qrcode"></div>
+            <img src="{{qrData}}"></img>
         </div>
     </div>
