@@ -11,7 +11,7 @@ db.pragma('journal_mode = WAL');
 let app = express();
 
 let bodyParser = require("body-parser");
-//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.engine('handlebars', expressHandlebars.engine());
 app.set('view engine', 'handlebars');
@@ -102,9 +102,10 @@ app.post('/add-new-movie', function(req, res){
 });
 
 app.post('/delete-movie', function(req, res){
-    db.prepare("DELETE FROM films WHERE title=?").run(req.body.movieDelete);
+    db.prepare("DELETE FROM films WHERE title=?1 or filmID=?1").run({1:req.body.movieDelete});
     console.table(req.body);
 });
+
 let server = app.listen(5000, function () {
     console.log('Node server is running..');
 });

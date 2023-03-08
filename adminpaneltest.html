@@ -8,36 +8,40 @@
 </head>
 <body>
 
-    <!--Adding Movie-->
+    
     <div style="display:flex;flex-direction:column;align-items:center;">
         <h1>Cinema System - Administrator Panel</h1>
-        <div style="display:flex;flex-direction:row;">
-            <form action="/add-new-movie" method="POST">
-                        <label for="titleINP">Title:</label>
-                        <input id="titleINP" name="title" type="text"><br>
 
-                        <label for="yearINP">Year:</label>
-                        <input id="yearINP" name="year" type="text"><br>
+        <!--Adding Movie-->
+        <form action="/add-new-movie" method="POST">
+            <div style="display:flex;flex-direction:row;">
+                <div>
+                    <label for="titleINP">Title:</label><br>
+                    <label for="yearINP">Year:</label><br>
+                    <label for="ratingINP">Rating:</label><br>
+                    <label for="descriptionINP">Description:</label>
+                </div>
+                <div>
+                    <input id="titleINP" name="title" type="text"><br>
+                    <input id="yearINP" name="year" type="text"><br>
+                    <select id="ratingINP" name="rating" style="width:177px;">
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="12">12</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                    </select><br>
+                    <textarea id="descriptionINP" name="description" style="height:60px;width:171px;"></textarea>
+                    <input type="submit">
+                </div>
+            </div>
+        </form>
 
-                        <label for="ratingINP">Rating:</label>
-                        <select id="ratingINP" name="rating" style="width:177px;">
-                            <option value="G">G</option>
-                            <option value="PG">PG</option>
-                            <option value="12A">12</option>
-                            <option value="15A">15</option>
-                            <option value="16">16</option>
-                            <option value="18">18</option>
-                        </select>
-
-                        <label for="descriptionINP">Description:</label>
-                        <textarea id="descriptionINP" name="description" style="height:60px;width:171px;"></textarea>
-                <input type="submit">
-            </form>
-        </div>
 
         <!--Deleting Movie-->
         <form action="/delete-movie" method="POST">
-            <label for="movieDEL">Title:</label>
+            <label for="movieDEL">Delete (ID or title): </label>
             <input id="movieDEL" name="movieDelete" type="text"><br>
             <input type="submit">
         </form>
@@ -56,26 +60,44 @@
 
         <!--Movie Display-->
         <div class="movieRow">
-            <div class="movieDisp11" style="width:100px;">Title</div>
+            <div class="movieDisp11">ID</div>
+            <div class="movieDisp12" style="width:100px;">Title</div>
+            <div class="movieDisp11">Year</div>
             <div class="movieDisp12">Rating</div>
-            <div class="movieDisp11">Duration</div>
-            <div class="movieDisp12" style="width:380px;height:fit-content;">Description</div>
+            <div class="movieDisp11" style="width:380px;height:fit-content;">Description</div>
         </div>
         <hr class="line">
 
         <div class="movieRow">
-            <div class="movieDisp21" style="width:100px;">Tisadasdastle</div>
-            <div class="movieDisp22">pg</div>
-            <div class="movieDisp21">2131</div>
-            <div class="movieDisp22" style="width:380px;height:fit-content;">gjbreirgbaeiuhbi ergav ivev iytfaugf vt fIFI A A I  iftv awkegvfaiwyvfakgvf awiov f</div>
+            <div class="movieDisp21">1</div>
+            <div class="movieDisp22" style="width:100px;">MOVIE1</div>
+            <div class="movieDisp21">2020</div>
+            <div class="movieDisp22">PG</div>
+            <div class="movieDisp21" style="width:380px;height:fit-content;">DESC OF MOVIE 1 CUZ</div>
         </div>
         <hr class="line">
-
         <div class="movieRow">
-            <div class="movieDisp21" style="width:100px;">Tisadasdastle</div>
-            <div class="movieDisp22">pg</div>
-            <div class="movieDisp21">2131</div>
-            <div class="movieDisp22" style="width:380px;height:fit-content;">gjbreirgbaeiuhbi ergav ivev iytfaugf vt fIFI A A I  iftv awkegvfaiwyvfakgvf awiov f</div>
+            <div class="movieDisp21">1</div>
+            <div class="movieDisp22" style="width:100px;">MOVIE1</div>
+            <div class="movieDisp21">2020</div>
+            <div class="movieDisp22">PG</div>
+            <div class="movieDisp21" style="width:380px;height:fit-content;">DESC OF MOVIE 1 CUZ</div>
+        </div>
+        <hr class="line">
+        <div class="movieRow">
+            <div class="movieDisp21">1</div>
+            <div class="movieDisp22" style="width:100px;">MOVIE1</div>
+            <div class="movieDisp21">2020</div>
+            <div class="movieDisp22">PG</div>
+            <div class="movieDisp21" style="width:380px;height:fit-content;">DESC OF MOVIE 1 CUZ</div>
+        </div>
+        <hr class="line">
+        <div class="movieRow">
+            <div class="movieDisp21">1</div>
+            <div class="movieDisp22" style="width:100px;">MOVIE1</div>
+            <div class="movieDisp21">2020</div>
+            <div class="movieDisp22">PG</div>
+            <div class="movieDisp21" style="width:380px;height:fit-content;">DESC OF MOVIE 1 CUZ</div>
         </div>
         <hr class="line">
     </div>
