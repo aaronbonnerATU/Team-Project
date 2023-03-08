@@ -1,9 +1,12 @@
 let express = require('express');
 let expressHandlebars = require('express-handlebars');
+let qrcode = require("qrcode");
+let { v4: uuidv4 } = require("uuid");
 
 const Database = require('better-sqlite3');
 let db = new Database('filmDB.db', {verbose: console.log });
 db.pragma('journal_mode = WAL');
+
 
 let app = express();
 
@@ -30,6 +33,47 @@ app.get('/films', function (req, res) {
     console.table(rows);
     res.render("films", {films: rows});
 });
+
+app.get('/book', function (req, res) {
+    let filmID = req.query.film;
+    let film;
+
+    film = db.prepare("select * from films where filmid = ?").all(filmID);
+    if (film.length === 0) {
+        res.redirect("/");
+        return;
+    }
+
+    res.render("booking", film[0]);
+});
+
+app.get('/ticket', function (req, res) {
+    let filmID = req.query.film;
+    let film;
+
+    film = db.prepare("select * from films where filmid = ?").all(filmID);
+    if (film.length === 0) {
+        res.redirect("/");
+        return;
+    }
+
+    film = film[0];
+    let ticketID = uuidv4();
+
+    qrcode.toDataURL(ticketID).then(
+        (qrData) => {
+            film.qrData = qrData;
+            film.date = "01-01-2022";
+            //console.table(film);
+            db.prepare("insert into tickets values (?,?)").run(Math.floor(Math.random()*1000000), ticketID);
+            res.render("ticket", film);
+        }).catch( 
+            (err) => {
+            console.log(err);
+            res.redirect("/");    
+        });
+});
+
 
 app.post('/submit-login-data', function (req, res) {
    let name = req.body.username + ' ' + req.body.password;
