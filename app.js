@@ -34,6 +34,21 @@ app.get('/films', function (req, res) {
     res.render("films", {films: rows});
 });
 
+app.get('/screenings', function (req, res) {
+    let film = req.query.film;
+    let rows = [];
+    if (film !== undefined) {
+        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.roomID) as placesLeft, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity;").all(film);
+    } else {
+        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.roomID) as placesLeft, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID").all();
+
+    }
+
+    console.table(rows);
+
+    res.render("viewscreening", {screenings: rows});
+});
+
 app.get('/book', function (req, res) {
     let filmID = req.query.film;
     let film;
@@ -56,25 +71,25 @@ app.get('/book', function (req, res) {
 });
 
 app.get('/ticket', function (req, res) {
-    let filmID = req.query.film;
-    let film;
+    let screeningID = req.query.screening;
+    let screening;
 
-    film = db.prepare("select * from films where filmid = ?").all(filmID);
-    if (film.length === 0) {
+    screening = db.prepare("select title, rating, showtime from screenings, films where screeningID = ? and screenings.filmID = films.filmID").all(screeningID);
+    if (screening.length === 0) {
         res.redirect("/");
         return;
     }
 
-    film = film[0];
+    screening = screening[0];
     let ticketID = uuidv4();
 
     qrcode.toDataURL(ticketID).then(
         (qrData) => {
-            film.qrData = qrData;
-            film.date = "01-01-2022";
+            screening.qrData = qrData;
+            screening.date = "01-01-2022";
             //console.table(film);
             db.prepare("insert into tickets values (?,?)").run(Math.floor(Math.random()*1000000), ticketID);
-            res.render("ticket", film);
+            res.render("ticket", screening);
         }).catch( 
             (err) => {
             console.log(err);

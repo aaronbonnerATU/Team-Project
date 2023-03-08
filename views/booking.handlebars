@@ -4,16 +4,22 @@
       <h1>MAKE A BOOKING</h1>
     </div>
 
-  
+  <div id="detailsOuter">
   <div class="detailsContainer">
 
     <img src="images/poster1.png" class="image">
-    <div class="center">
-      <button id="makeBooking" class="btn">Book Movie</a></button>
-      <p class="filmTitle">{{title}} ({{rating}})</p>
-      <p class="filmLength">{{year}}</p>
+    
+    <div class="filmDescriptionContainer">
+      <div id="filmTitleRating">
+        <p class="filmTitle">{{title}}</p>
+        <img src="images/{{rating}} Rating.png" class="imgRating">  
+      </div>
+      <p class="filmSummary">{{description}}</p>
+      <a href="screenings?film={{filmID}}"><button id="makeBooking" class="btn">Book Movie</button></a>
+      
     </div>
-
-    <p class="filmSummary">{{description}}</p>
   </div>
+    
+  </div>
+
   <script src="scripts/booking.js"></script>

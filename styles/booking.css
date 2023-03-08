@@ -8,17 +8,17 @@
   margin: 2%;
   width: 40%;
   height: auto;
-  }
+}
 
-  .imgRating {
+.imgRating {
     display: flex;
     margin: 20px;
-    width: 80px;
-      height: auto;
+    width: auto;
+    height: 2em;
     margin-right: auto;
     }
 
-  .detailsContainer {
+.detailsContainer {
     max-width: 800px;
     align-self: center;
     border-bottom: 5px solid rgb(0, 0, 0);
@@ -84,6 +84,8 @@
     font-family: sans-serif;
   }
   
-  
-  
-
+#filmTitleRating {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

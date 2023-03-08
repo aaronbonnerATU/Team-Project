@@ -47,3 +47,8 @@
   tr:nth-child(even) {
     background-color: #dddddd;
   }
+
+      /*Button on hover & focus */
+      .btn:hover, .btn:focus {
+        background-color: #D3D3D3;
+      }

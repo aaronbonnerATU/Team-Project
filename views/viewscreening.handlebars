@@ -1,15 +1,30 @@
    
-<link rel= "stylesheet" href ="styles/booking.css">
-    <div id="makeBookingBanner">
-      <h1>View Screenings</h1>
+<link rel= "stylesheet" href ="styles/viewscreening.css">
+
+    <div id="viewScreeningBanner">
+        <h1>MAKE A BOOKING</h1>
     </div>
-
-  
-  <div class="detailsContainer">
-
-  
-    <div class="center">
-
+    <div id="detailsOuter">
+        <table>
+            <tr>
+                <th>Screen</th>
+                <th>Movie Name</th>
+                <th>Date</th>
+                <th>Available Seats</th>
+                <th></th>
+            </tr>
+            {{#if screenings}}
+            {{#each screenings}}
+            <tr>
+                <td>Screen {{roomID}}</td>
+                <td>{{title}}</td>
+                <td>{{showtime}}</td>
+                <td>{{placesLeft}} Remaining</td>
+                <td><a href="ticket?screening={{screeningID}}"><button id="makeBooking" class="btn">Book Movie</button></a></td>
+                <td>€8.00</td>
+            </tr>
+            {{/each}}
+            {{/if}}
+      </table>
     </div>
-  </div>
-  <script src="scripts/viewscreening.js"></script>
+    

@@ -1,15 +1,56 @@
 
     <link rel= "stylesheet" href ="styles/viewticket.css">
 
-    <div id="viewTicketBanner">
-        <h1>View Ticket</h1>
-    </div>
+    <div class="text">
+        <h1>MOMA CINEMA</h1>
+        </div>
+    
+        <div id="viewTicketBanner">
+          <h1>View Ticket</h1>
+        </div>
 
     <div class="viewticketContainer">
         <div class="center">
-            <p class="filmTitle">{{title}}</p>
-            <p class="ticketDate">{{date}}</p>
-            <p class="filmTitle"><b>Seat:</b>A6</p>
-            <img src="{{qrData}}"></img>
+            <p class="filmTitle">{{title}} ({{rating}})</p>
+            <p class="ticketLength">{{showtime}}</p>
+            <p class="ticketLength">€8.00</p>
         </div>
+        <img id="qrcode" src="{{qrData}}"></img>
+
     </div>
+
+    <div class="Coming_Soon">
+        <h1>Coming Soon to MOMA</h1>
+    </div>
+
+    <div class="row">
+        <div class="column">
+          <img src="imgs/img1.jpg" style="width:100%">
+        </div>
+        <div class="column">
+          <img src="imgs/img2.jpg" style="width:100%">
+        </div>
+        <div class="column">
+          <img src="imgs/img3.jpg" style="width:100%">
+        </div>
+        <div class="column">
+            <img src="imgs/img4.jpg" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="imgs/img5.jpg" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="imgs/img6.jpg" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="imgs/img7.jpg" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="imgs/img8.jpg" style="width:100%">
+          </div>
+          <div class="column">
+            <img src="imgs/img9.jpg" style="width:100%">
+          </div>
+      </div>
+
+      <script type="text/javascript" src="scripts/viewticket.js"></script>
