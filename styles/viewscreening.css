@@ -30,12 +30,15 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    
   }
 
   table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 16px;
   }
   
   td, th {
