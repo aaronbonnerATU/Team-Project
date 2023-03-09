@@ -145,26 +145,35 @@ app.post('/de-re-comission-screen', function (req, res){
     console.log(result);
 });
 
-app.post('/add-new-movie', function(req, res){
+app.post('/add-screening', function(req, res){
     let lastRow = db.prepare("SELECT * FROM screenings ORDER BY screeningID DESC LIMIT 1").all()
     let screeningID = 0;
     if (lastRow.length > 0) {
         screeningID = 1 + lastRow[0].screeningID;
     }
+    
+    //console.table(req.body);
 
-    console.table(req.body);
-
-    //if(){
-    //    db.prepare("INSERT INTO films VALUES (?,?,?,?,?)").run(filmID, req.body.title, req.body.year, req.body.rating, req.body.description);
-    //}
+    db.prepare("INSERT INTO screenings VALUES (?,?,?,?,?)").run(screeningID, req.body.filmID, req.body.roomID, 0, req.body.date+" "+req.body.time);
 });
 
-app.post('/delete-movie', function(req, res){
-    db.prepare("DELETE FROM films WHERE title=?1 or filmID=?1").run({1:req.body.movieDelete});
-    console.table(req.body);
+app.post('/remove-screening', function(req, res){
+    if(req.body.optionCH === "screeningID"){
+        db.prepare("DELETE FROM screenings WHERE screeningID=?1").run({1:req.body.deleteID});
+    }
+    else if(req.body.optionCH === "filmID"){
+        db.prepare("DELETE FROM screenings WHERE filmID=?1").run({1:req.body.deleteID});
+    }
+    else if((req.body.optionCH=== "roomID")){
+        db.prepare("DELETE FROM screenings WHERE roomID=?1").run({1:req.body.deleteID});
+    }
+
+    //console.log(req);
+    //console.log();
+    //console.log(req.body);
+    //console.log();
+    //console.table(req.body);
 });
-
-
 
 //------------------------------
 
