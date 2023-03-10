@@ -11,7 +11,9 @@
                 <th>Movie Name</th>
                 <th>Date</th>
                 <th>Available Seats</th>
+                <th>Price</th>
                 <th></th>
+                
             </tr>
             {{#if screenings}}
             {{#each screenings}}
@@ -20,8 +22,9 @@
                 <td>{{title}}</td>
                 <td>{{showtime}}</td>
                 <td>{{placesLeft}} Remaining</td>
-                <td><a href="ticket?screening={{screeningID}}"><button id="makeBooking" class="btn">Book Movie</button></a></td>
                 <td>€8.00</td>
+                <td><a href="ticket?screening={{screeningID}}"><button id="makeBooking" class="btn">Book Movie</button></a></td>
+                
             </tr>
             {{/each}}
             {{/if}}
