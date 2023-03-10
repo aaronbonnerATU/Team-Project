@@ -89,6 +89,7 @@ app.get('/ticket', function (req, res) {
             screening.date = "01-01-2022";
             //console.table(film);
             db.prepare("insert into tickets values (?,?)").run(Math.floor(Math.random()*1000000), ticketID);
+            db.prepare("update screenings set seatsBooked=(seatsBooked+1) where screeningID = ?").run(screeningID);
             res.render("ticket", screening);
         }).catch( 
             (err) => {
