@@ -38,9 +38,9 @@ app.get('/screenings', function (req, res) {
     let film = req.query.film;
     let rows = [];
     if (film !== undefined) {
-        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity order by showtime;").all(film);
+        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity order by showtime;").all(film);
     } else {
-        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID order by showtime").all();
+        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID order by showtime").all();
 
     }
 
