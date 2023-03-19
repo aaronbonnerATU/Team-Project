@@ -63,8 +63,10 @@
               <label>
                 <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
               </label>
-              <input type="submit" value="Continue to checkout" class="btn">
-              <button class="btn"><a href = "booking.html">Cancel</a></button>
+
+              {{!-- <input type="submit" value="Continue to checkout" class="btn"> --}}
+              <button id="makeBooking"><a href = "ticket?payment">Proceed to checkout</a></button>
+              <button id="makeBooking"><a href = "screening?payment">Cancel</a></button>
             </form>
           </div>
         </div>
