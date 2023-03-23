@@ -196,7 +196,16 @@ app.post('/remove-screening', function(req, res){
     //console.table(req.body);
 });
 
-//------------------------------
+app.post('/add-discount', function(req, res){
+    db.prepare("INSERT INTO discounts VALUES (?,?)").run(req.body.discountCodeINP, req.body.discountFractionINP);
+});
+
+app.post('/remove-discount', function(req, res){
+    db.prepare("DELETE FROM discounts WHERE code=?").run(req.body.discountCodeDelINP);
+});
+
+
+//---------------------------
 
 let server = app.listen(5000, function () {
     console.log('Node server is running..');
