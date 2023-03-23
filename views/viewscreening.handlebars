@@ -6,7 +6,6 @@
     </div>
     <div id="detailsOuter">
             {{#if screenings}}
-            {{#each screenings}}
             <table>
             <tr>
                 <th>Screen</th>
@@ -17,13 +16,15 @@
                 <th></th>
                 
             </tr>
+            {{#each screenings}}
+            
             <tr>
                 <td>Screen {{roomID}}</td>
                 <td>{{title}}</td>
                 <td>{{showtime}}</td>
                 <td>{{placesLeft}} Remaining</td>
                 <td>€8.00</td>
-                <td><a href="payment?screening"><button id="makeBooking" class="btn">Book Movie</button></a></td>
+                <td><a href="payment?screening={{screeningID}}"><button id="makeBooking" class="btn">Book Movie</button></a></td>
                 
             </tr>
             {{/each}}
