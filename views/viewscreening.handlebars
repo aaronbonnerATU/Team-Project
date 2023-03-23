@@ -5,7 +5,9 @@
         <h1>MAKE A BOOKING</h1>
     </div>
     <div id="detailsOuter">
-        <table>
+            {{#if screenings}}
+            {{#each screenings}}
+            <table>
             <tr>
                 <th>Screen</th>
                 <th>Movie Name</th>
@@ -15,8 +17,6 @@
                 <th></th>
                 
             </tr>
-            {{#if screenings}}
-            {{#each screenings}}
             <tr>
                 <td>Screen {{roomID}}</td>
                 <td>{{title}}</td>
@@ -27,6 +27,9 @@
                 
             </tr>
             {{/each}}
+            {{else}}
+            <br>
+                <h2>No screenings!</h2>
             {{/if}}
       </table>
     </div>

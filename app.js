@@ -36,6 +36,7 @@ app.get('/films', function (req, res) {
 
 app.get('/screenings', function (req, res) {
     let film = req.query.film;
+    console.log(film);
     let rows = [];
     if (film !== undefined) {
         rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity order by showtime;").all(film);
@@ -70,6 +71,8 @@ app.get('/book', function (req, res) {
     res.render("booking", film[0]);
 });
 
+
+
 app.get('/ticket', function (req, res) {
     let screeningID = req.query.screening;
     let screening;
@@ -96,6 +99,23 @@ app.get('/ticket', function (req, res) {
             console.log(err);
             res.redirect("/");    
         });
+});
+
+app.get('/payment', function (req, res) {
+    let screeningID = req.query.screening;
+    let screening;
+
+    screening = db.prepare("select films.filmID, screeningID, title, rating, showtime, description from screenings, films where screeningID = ? and screenings.filmID = films.filmID").all(screeningID);
+    if (screening.length === 0) {
+        res.redirect("/");
+        return;
+    }
+
+    screening = screening[0];
+
+    res.render("payment", screening);
+
+    
 });
 
 app.post('/submit-login-data', function (req, res) {
