@@ -3,169 +3,173 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="./styles/managementpanel.css">
     <title>Management Panel</title>
 </head>
 <body>
-    <div style="width:100%;height:50px;">
+    <div style="width:100%;height:50px;text-align:center;">
         <h1>Cinema System - Management Panel</h1>
     </div>
-    
-    <div style="display:flex;flex-direction:column;margin-bottom:30px;">
+
+    <div class="flexRow" style="height:183px;">
+        <div class="flexColumnM" style="width:250px;height:183px;">
+            <h3>Add Screening</h3>
+            <form action="/add-screening" method="POST">
+                <div class="flexRow">
+                    <div class="flexColumn" style="align-items:flex-end;">
+                        <label for="filmIDINP">Film(ID): </label>
+                        <label for="roomIDINP">Room: </label>
+                        <label for="dateINP">Date: </label>
+                        <label for="timeINP">Time: </label>
+                    </div>
+
+                    <div class="flexColumn" style="margin-left:4px;">
+                        <input id="filmIDINP" name="filmID" type="text" style="margin-bottom:1px;">
+                        <input id="roomIDINP" name="roomID" type="text" style="margin-bottom:1px;">
+                        <input id="dateINP" name="date" type="date" style="margin-bottom:1px;">
+                        <input id="timeINP" name="time" type="time" list="time-list" style="margin-bottom:1px;">
+                        <datalist id="time-list">
+                            <option value="09:00" datatype="time">
+                            <option value="09:15" datatype="time">
+                            <option value="09:30" datatype="time">
+                            <option value="09:45" datatype="time">
+            
+                            <option value="10:00" datatype="time">
+                            <option value="10:15" datatype="time">
+                            <option value="10:30" datatype="time">
+                            <option value="10:45" datatype="time">
+            
+                            <option value="11:00" datatype="time">
+                            <option value="11:15" datatype="time">
+                            <option value="11:30" datatype="time">
+                            <option value="11:45" datatype="time">
+            
+                            <option value="12:00" datatype="time">
+                            <option value="12:15" datatype="time">
+                            <option value="12:30" datatype="time">
+                            <option value="12:45" datatype="time">
+            
+                            <option value="13:00" datatype="time">
+                            <option value="13:15" datatype="time">
+                            <option value="13:30" datatype="time">
+                            <option value="13:45" datatype="time">
+            
+                            <option value="14:00" datatype="time">
+                            <option value="14:15" datatype="time">
+                            <option value="14:30" datatype="time">
+                            <option value="14:45" datatype="time">
+            
+                            <option value="15:00" datatype="time">
+                            <option value="15:15" datatype="time">
+                            <option value="15:30" datatype="time">
+                            <option value="15:45" datatype="time">
+            
+                            <option value="16:00" datatype="time">
+                            <option value="16:15" datatype="time">
+                            <option value="16:30" datatype="time">
+                            <option value="16:45" datatype="time">
+            
+                            <option value="17:00" datatype="time">
+                            <option value="17:15" datatype="time">
+                            <option value="17:30" datatype="time">
+                            <option value="17:45" datatype="time">
+            
+                            <option value="18:00" datatype="time">
+                            <option value="18:15" datatype="time">
+                            <option value="18:30" datatype="time">
+                            <option value="18:45" datatype="time">
+            
+                            <option value="19:00" datatype="time">
+                            <option value="19:15" datatype="time">
+                            <option value="19:30" datatype="time">
+                            <option value="19:45" datatype="time">
+            
+                            <option value="20:00" datatype="time">
+                            <option value="20:15" datatype="time">
+                            <option value="20:30" datatype="time">
+                            <option value="20:45" datatype="time">
+            
+                            <option value="21:00" datatype="time">
+                            <option value="21:15" datatype="time">
+                            <option value="21:30" datatype="time">
+                            <option value="21:45" datatype="time">
+            
+                            <option value="22:00" datatype="time">
+                            <option value="22:15" datatype="time">
+                            <option value="22:30" datatype="time">
+                            <option value="22:45" datatype="time">
+            
+                            <option value="23:00" datatype="time">
+                            <option value="23:15" datatype="time">
+                            <option value="23:30" datatype="time">
+                            <option value="23:45" datatype="time">
+                        </datalist>
+                    </div>
+                </div>
+                <input type="submit" class="inputSubmit" style="margin-left:85px;">
+            </form>
+        </div>
+
+        <div class="flexColumnM" style="width:240px;height:135px;">
+            <h3>Delete Screening</h3>
+            <form action="/remove-screening" method="post">
+                <div class="flexRow">
+                    <div class="flexColumn" style="align-items:flex-end;">
+                        <label for="optionCHSl">Option:</label>
+                        <label for="deleteINP">Enter: </label>
+                    </div>
+                    
+                    <div class="flexColumn" style="margin-left:4px;">
+                        <select id="optionCHSl" name="optionCH" style="margin-bottom:1px;">
+                            <option value="screeningID">Screening ID</option>
+                            <option value="filmID">Film ID</option>
+                            <option value="roomID">Room ID</option>
+                        </select>
+                        <input id="deleteINP" name="deleteID" style="margin-bottom:1px;">
+                    </div>
+                </div>
+            <input type="submit" class="inputSubmit" style="margin-left:80px;">
+            </form>
+        </div>
+    </div>
+
+    <div class="flexRow" style="height:135px;">
+        <div class="flexColumnM" style="width:320px;height:135px;">
+            <h3>Add Discount Code</h3>
+            <form action="/add-discount" method="post">
+                <div class="flexRow">
+                    <div class="flexColumn" style="align-items:flex-end;">
+                        <label for="discountCodeINP">Discount Code: </label>
+                        <label for="discountFractionINP">Discount Fraction: </label>
+                    </div>
+                    
+                    <div class="flexColumn" style="margin-left:4px;">
+                        <input id="discountCodeINP" name="discountCodeINP" type="text" style="margin-bottom:1px;">
+                        <input id="discountFractionINP" name="discountFractionINP" type="text" style="margin-bottom:1px;">
+                    </div>
+                </div>
+                <input type="submit" class="inputSubmit" style="margin-left:120px;">
+            </form>
+        </div>
+
+        <div class="flexColumnM" style="width:300px;height:110px;">
+            <h3>Delete Discount Code</h3>
+            <form action="/remove-discount" method="post">
+                <div class="flexRow">
+                    <label for="discountCodeDelINP" style="margin-right:2px;">Discount Code: </label>
+                    <input id="discountCodeDelINP" name="discountCodeDelINP" type="text">
+                </div>
+                <input type="submit" class="inputSubmit" style="margin-left:110px;">
+            </form>
+        </div>
+    </div>
+
+    <div class="flexColumnM" style="width:335px;height:90px;">
         <h3>De/Re-comission Screen</h3>
         <form action="/de-re-comission-screen" method="POST">
             <label for="booScreen">Room ID: </label>
             <input id="booScreen" name="booScreen" type="text">
-            <input type="submit">
-        </form>
-    </div>
-
-    <div style="display:flex;flex-direction:column;margin-bottom:30px;width:235px;align-items:center;">
-        <h3>Add Screening</h3>
-        <form action="/add-screening" method="POST">
-            <div style="display:flex;flex-direction:row;">
-                <div style="display:flex;flex-direction:column;align-items:flex-end;">
-                    <label for="filmIDINP" style="margin-bottom:4px;">Film(ID): </label>
-                    <label for="roomIDINP" style="margin-bottom:4px;">Room: </label>
-                    <label for="dateINP" style="margin-bottom:5px;">Date: </label>
-                    <label for="timeINP" style="margin-bottom:5px;">Time: </label>
-                </div>
-
-                <div style="display:flex;flex-direction:column;margin-left:4px;">
-                    <input id="filmIDINP" name="filmID" type="text" style="margin-bottom:1px;">
-                    <input id="roomIDINP" name="roomID" type="text" style="margin-bottom:1px;">
-                    <input id="dateINP" name="date" type="date" style="margin-bottom:1px;">
-                    <input id="timeINP" name="time" type="time" list="time-list" style="margin-bottom:1px;">
-                    <datalist id="time-list">
-                        <option value="09:00" datatype="time">
-                        <option value="09:15" datatype="time">
-                        <option value="09:30" datatype="time">
-                        <option value="09:45" datatype="time">
-        
-                        <option value="10:00" datatype="time">
-                        <option value="10:15" datatype="time">
-                        <option value="10:30" datatype="time">
-                        <option value="10:45" datatype="time">
-        
-                        <option value="11:00" datatype="time">
-                        <option value="11:15" datatype="time">
-                        <option value="11:30" datatype="time">
-                        <option value="11:45" datatype="time">
-        
-                        <option value="12:00" datatype="time">
-                        <option value="12:15" datatype="time">
-                        <option value="12:30" datatype="time">
-                        <option value="12:45" datatype="time">
-        
-                        <option value="13:00" datatype="time">
-                        <option value="13:15" datatype="time">
-                        <option value="13:30" datatype="time">
-                        <option value="13:45" datatype="time">
-        
-                        <option value="14:00" datatype="time">
-                        <option value="14:15" datatype="time">
-                        <option value="14:30" datatype="time">
-                        <option value="14:45" datatype="time">
-        
-                        <option value="15:00" datatype="time">
-                        <option value="15:15" datatype="time">
-                        <option value="15:30" datatype="time">
-                        <option value="15:45" datatype="time">
-        
-                        <option value="16:00" datatype="time">
-                        <option value="16:15" datatype="time">
-                        <option value="16:30" datatype="time">
-                        <option value="16:45" datatype="time">
-        
-                        <option value="17:00" datatype="time">
-                        <option value="17:15" datatype="time">
-                        <option value="17:30" datatype="time">
-                        <option value="17:45" datatype="time">
-        
-                        <option value="18:00" datatype="time">
-                        <option value="18:15" datatype="time">
-                        <option value="18:30" datatype="time">
-                        <option value="18:45" datatype="time">
-        
-                        <option value="19:00" datatype="time">
-                        <option value="19:15" datatype="time">
-                        <option value="19:30" datatype="time">
-                        <option value="19:45" datatype="time">
-        
-                        <option value="20:00" datatype="time">
-                        <option value="20:15" datatype="time">
-                        <option value="20:30" datatype="time">
-                        <option value="20:45" datatype="time">
-        
-                        <option value="21:00" datatype="time">
-                        <option value="21:15" datatype="time">
-                        <option value="21:30" datatype="time">
-                        <option value="21:45" datatype="time">
-        
-                        <option value="22:00" datatype="time">
-                        <option value="22:15" datatype="time">
-                        <option value="22:30" datatype="time">
-                        <option value="22:45" datatype="time">
-        
-                        <option value="23:00" datatype="time">
-                        <option value="23:15" datatype="time">
-                        <option value="23:30" datatype="time">
-                        <option value="23:45" datatype="time">
-                    </datalist>
-                </div>
-            </div>
-            <input type="submit" style="width:60px;margin-left:80px;margin-top:3px;">
-        </form>
-    </div>
-
-    <div style="display:flex;flex-direction:column;margin-bottom:30px;width:235px;align-items:center;">
-        <h3>Delete Screening</h3>
-        <form action="/remove-screening" method="post">
-            <div style="display:flex;flex-direction:row;">
-                <div style="display:flex;flex-direction:column;align-items:flex-end;">
-                    <label for="optionCHSl">Option:</label>
-                    <label for="deleteINP">Enter: </label>
-                </div>
-                
-                <div style="display:flex;flex-direction:column;margin-left:4px;">
-                    <select id="optionCHSl" name="optionCH" style="margin-bottom:1px;">
-                        <option value="screeningID">Screening ID</option>
-                        <option value="filmID">Film ID</option>
-                        <option value="roomID">Room ID</option>
-                    </select>
-                    <input id="deleteINP" name="deleteID" style="margin-bottom:1px;">
-                </div>
-            </div>
-        <input type="submit">
-        </form>
-    </div>
-
-    <div style="display:flex;flex-direction:column;margin-bottom:30px;width:305px;align-items:center;">
-        <h3>Add Discount Code</h3>
-        <form action="/add-discount" method="post">
-            <div style="display:flex;flex-direction:row;">
-                <div style="display:flex;flex-direction:column;align-items:flex-end;">
-                    <label for="discountCodeINP">Discount Code: </label>
-                    <label for="discountFractionINP">Discount Fraction: </label>
-                </div>
-                
-                <div style="display:flex;flex-direction:column;margin-left:4px;">
-                    <input id="discountCodeINP" name="discountCodeINP" type="text" style="margin-bottom:1px;">
-                    <input id="discountFractionINP" name="discountFractionINP" type="text" style="margin-bottom:1px;">
-                </div>
-            </div>
-            <input type="submit">
-        </form>
-    </div>
-
-    <div style="display:flex;flex-direction:column;margin-bottom:30px;width:305px;align-items:center;">
-        <h3>Delete Discount Code</h3>
-        <form action="/remove-discount" method="post">
-            <div style="display:flex;flex-direction:row;">
-                <label for="discountCodeDelINP" style="margin-right:2px;">Discount Code: </label>
-                <input id="discountCodeDelINP" name="discountCodeDelINP" type="text">
-            </div>
-            <input type="submit">
+            <input type="submit" class="inputSubmit">
         </form>
     </div>
 </body>
