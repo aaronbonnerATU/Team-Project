@@ -1,30 +1,30 @@
-        <link rel= "stylesheet" href ="styles/films.css">
+<link rel= "stylesheet" href ="styles/films.css">
 
-    <div class="topnav">
-        <div class="search-container">
-              <input type="text" placeholder="Search.." id="searchBar" type="search">
-              <button type="submit" id="searchBtn">Search</button>
-          </div>
-      </div>
-
-    <div id="filmList">
-        {{#if films}}
-            {{#each films}}
-            <div class="filmContainer">
-                <img src="images/poster1.png" class="filmImg">
-                <div class="filmDescriptionContainer">
-                    <p class="filmTitle">{{title}} ({{rating}})</p>
-                    <p class="filmYear">{{year}}</p>
-                    <p class="filmSummary">{{description}}</p>
-                    <a href="book/?film={{filmID}}"><button class="filmTrailerBtn">View Details to Book</button></a>
-                </div>
-            </div>
-            {{/each}}
-        {{else}}
-        <div class="filmContainer">
-            <p class="filmTitle">No results found</p>
-        </div>
-        {{/if}}
+<div class="topnav">
+    <div class="search-container">
+        <input type="text" placeholder="Search.." id="searchBar" type="search">
+        <button type="submit" id="searchBtn">Search</button>
     </div>
+</div>
 
-    <script src="scripts/films.js"></script>
+<div id="filmList">
+    {{#if films}}
+        {{#each films}}
+        <div class="filmContainer">
+            <img src="images/poster1.png" class="filmImg">
+            <div class="filmDescriptionContainer">
+                <p class="filmTitle">{{title}} ({{rating}})</p>
+                <p class="filmYear">{{year}}</p>
+                <p class="filmSummary">{{description}}</p>
+                <a href="book/?film={{filmID}}"><button class="filmTrailerBtn">View Details to Book</button></a>
+            </div>
+        </div>
+        {{/each}}
+    {{else}}
+    <div class="filmContainer">
+        <p class="filmTitle">No results found</p>
+    </div>
+    {{/if}}
+</div>
+
+<script src="scripts/films.js"></script>

@@ -26,6 +26,7 @@
                     <div class="flexColumn" style="margin-left:4px;">
                         <input id="filmIDINP" name="filmID" type="text" style="margin-bottom:1px;">
                         <input id="roomIDINP" name="roomID" type="text" style="margin-bottom:1px;">
+                        
                         <input id="dateINP" name="date" type="date" style="margin-bottom:1px;">
                         <input id="timeINP" name="time" type="time" list="time-list" style="margin-bottom:1px;">
                         <datalist id="time-list">
@@ -131,9 +132,7 @@
             <input type="submit" class="inputSubmit" style="margin-left:80px;">
             </form>
         </div>
-    </div>
 
-    <div class="flexRow" style="height:135px;">
         <div class="flexColumnM" style="width:320px;height:135px;">
             <h3>Add Discount Code</h3>
             <form action="/add-discount" method="post">
@@ -162,14 +161,23 @@
                 <input type="submit" class="inputSubmit" style="margin-left:110px;">
             </form>
         </div>
+
+        <div class="flexColumnM" style="width:270px;height:110px;">
+            <h3>De/Re-comission Screen</h3>
+            <form action="/de-re-comission-screen" method="POST">
+                <label for="booScreen">Room ID: </label>
+                <input id="booScreen" name="booScreen" type="text">
+                <input type="submit" class="inputSubmit" style="margin-left:100px;">
+            </form>
+        </div>
     </div>
 
-    <div class="flexColumnM" style="width:335px;height:90px;">
-        <h3>De/Re-comission Screen</h3>
-        <form action="/de-re-comission-screen" method="POST">
-            <label for="booScreen">Room ID: </label>
-            <input id="booScreen" name="booScreen" type="text">
-            <input type="submit" class="inputSubmit">
-        </form>
+    <div class="flexColumn">
+        <div class="flexRow">
+            <div class="screeningDispTop1">Screening ID</div>
+            <div class="screeningDispTop2">Film ID</div>
+            <div class="screeningDispTop1">Date</div>
+            <div class="screeningDispTop2">Time</div>
+        </div>
     </div>
 </body>
