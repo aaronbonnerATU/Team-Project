@@ -30,8 +30,15 @@ app.get('/films', function (req, res) {
     } else {
         rows = db.prepare("select * from films where (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
     }
+    
     console.table(rows);
     res.render("films", {films: rows});
+});
+
+app.get('/contact', function (req, res) {
+
+    res.render("contact");
+
 });
 
 app.get('/screenings', function (req, res) {
@@ -70,6 +77,8 @@ app.get('/book', function (req, res) {
 
     res.render("booking", film[0]);
 });
+
+
 
 
 
