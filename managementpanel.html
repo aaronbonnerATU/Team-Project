@@ -11,7 +11,7 @@
         <h1>Cinema System - Management Panel</h1>
     </div>
 
-    <div class="flexRow" style="height:183px;">
+    <div class="flexRow" style="height:183px;flex-wrap:wrap;">
         <div class="flexColumnM" style="width:250px;height:183px;">
             <h3>Add Screening</h3>
             <form action="/add-screening" method="POST">
@@ -172,12 +172,41 @@
         </div>
     </div>
 
-    <div class="flexColumn">
+    <div id="screeningList" class="flexColumn" style="text-align:center;">
         <div class="flexRow">
             <div class="screeningDispTop1">Screening ID</div>
             <div class="screeningDispTop2">Film ID</div>
-            <div class="screeningDispTop1">Date</div>
-            <div class="screeningDispTop2">Time</div>
+            <div class="screeningDispTop1">Room</div>
+            <div class="screeningDispTop2">Seats Booked</div>
+            <div class="screeningDispTop1" style="width:160px;">Date/Time</div>
+        </div>
+        <div class="flexRow">
+            <div class="screeningDisp1">2</div>
+            <div class="screeningDisp2">4</div>
+            <div class="screeningDisp1">4</div>
+            <div class="screeningDisp2">14</div>
+            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
+        </div>
+        <div class="flexRow">
+            <div class="screeningDisp1">2</div>
+            <div class="screeningDisp2">4</div>
+            <div class="screeningDisp1">4</div>
+            <div class="screeningDisp2">14</div>
+            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
+        </div>
+        <div class="flexRow">
+            <div class="screeningDisp1">2</div>
+            <div class="screeningDisp2">4</div>
+            <div class="screeningDisp1">4</div>
+            <div class="screeningDisp2">14</div>
+            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
+        </div>
+        <div class="flexRow">
+            <div class="screeningDisp1">2</div>
+            <div class="screeningDisp2">4</div>
+            <div class="screeningDisp1">4</div>
+            <div class="screeningDisp2">14</div>
+            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
         </div>
     </div>
 </body>

@@ -101,7 +101,7 @@ app.get('/ticket', function (req, res) {
         });
 });
 
-app.get('/payment', function (req, res) {
+app.get('/payment', function(req, res){
     let screeningID = req.query.screening;
     let screening;
 
@@ -114,8 +114,6 @@ app.get('/payment', function (req, res) {
     screening = screening[0];
 
     res.render("payment", screening);
-
-    
 });
 
 app.post('/submit-login-data', function (req, res) {
@@ -203,6 +201,11 @@ app.post('/add-discount', function(req, res){
 app.post('/remove-discount', function(req, res){
     db.prepare("DELETE FROM discounts WHERE code=?").run(req.body.discountCodeDelINP);
 });
+
+app.get("/show-screening",function(res, req)){
+    rows = db.prepare("SELECT * FROM screenings");
+    res.render("", {screenings: rows});
+}
 
 
 //---------------------------
