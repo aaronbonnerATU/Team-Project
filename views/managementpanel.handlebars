@@ -1,23 +1,26 @@
 <link rel= "stylesheet" href ="./styles/managementpanel.css">
 
 
-<div class="flexRow">
-    <div class="screeningDispTop1">Screening ID</div>
-    <div class="screeningDispTop2">Film ID</div>
-    <div class="screeningDispTop1">Room</div>
-    <div class="screeningDispTop2">Date/Time</div>
-</div>
 
-<div id="screeningList" class="flexRow">
+<div id="screeningList" class="flexColumn" style="text-align:center;">
+    <div class="flexRow">
+        <div class="dispTop1">Screening ID</div>
+        <div class="dispTop2">Film ID</div>
+        <div class="dispTop1">Room</div>
+        <div class="dispTop2">Seats Booked</div>
+        <div class="dispTop1" style="width:160px;">Date/Time</div>
+    </div>
     {{#if screenings}}
-        {{#each films}}
-            <div class="screeningDisp1">{{screeningID}}</div>
-            <div class="screeningDisp2">{{filmID}}</div>
-            <div class="screeningDisp1">{{roomID}}</div>
-            <div class="screeningDisp2">{{seatsBoked}}</div>
-            <div class="screeningDisp1"  style="width:160px;">{{showtime}}</div>
+        {{#each screenings}}
+        <div class="flexRow">
+            <div class="disp1">{{screeningID}}</div>
+            <div class="disp2">{{filmID}}</div>
+            <div class="disp1">{{roomID}}</div>
+            <div class="disp2">{{seatsBoked}}</div>
+            <div class="disp1"  style="width:160px;">{{showtime}}</div>
+        </div>
         {{/each}}
     {{else}}
-    <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Screenings table empty</div>
+        <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Screenings table empty</div>
     {{/if}}
 </div>

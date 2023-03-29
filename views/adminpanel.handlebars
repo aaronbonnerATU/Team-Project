@@ -1,0 +1,25 @@
+<link rel= "stylesheet" href ="./styles/adminpanel.css">
+
+<div id="movieList" class="flexColumn" style="text-align:center;">
+    <div class="flexRow">
+        <div class="dispTop1">Film ID</div>
+        <div class="dispTop2">Title</div>
+        <div class="dispTop1">Year</div>
+        <div class="dispTop2">Rating</div>
+        <div class="dispTop1" style="width:260px;">Description</div>
+    </div>
+    
+    {{#if films}}
+        {{#each films}}
+        <div class="flexRow">
+            <div class="disp1">{{filmID}}</div>
+            <div class="disp2">{{title}}</div>
+            <div class="disp1">{{year}}</div>
+            <div class="disp2">{{rating}}</div>
+            <div class="disp1"  style="width:260px;">{{description}}</div>
+        </div>
+        {{/each}}
+    {{else}}
+        <div style="width:660px;height:20px;background-color:rgb(160, 160, 160);">Films table empty</div>
+    {{/if}}
+</div>

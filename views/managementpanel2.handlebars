@@ -1,0 +1,22 @@
+<link rel= "stylesheet" href ="./styles/managementpanel.css">
+
+
+
+<div id="roomList" class="flexColumn" style="text-align:center;margin:10px;">
+    <div class="flexRow">
+        <div class="dispTop1">Room ID</div>
+        <div class="dispTop2">Capacity</div>
+        <div class="dispTop1" style="width:90px;">Decommisioned</div>
+    </div>
+    {{#if rooms}}
+        {{#each rooms}}
+        <div class="flexRow">
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{capacity}}</div>
+                <div class="disp1" style="width:90px;">{{decommisioned}}</div>
+            </div>
+        {{/each}}
+    {{else}}
+        <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Room table empty</div>
+    {{/if}}
+</div>

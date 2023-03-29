@@ -1,0 +1,20 @@
+<link rel= "stylesheet" href ="./styles/managementpanel.css">
+
+
+
+<div id="discountList" class="flexColumn" style="text-align:center;margin:10px;">
+    <div class="flexRow">
+        <div class="dispTop1">Code</div>
+        <div class="dispTop2">Discount</div>
+    </div>
+    {{#if discounts}}
+        {{#each discounts}}
+        <div class="flexRow">
+            <div class="disp1">{{code}}</div>
+            <div class="disp2">{{fractionDiscount}}</div>
+        </div>
+        {{/each}}
+    {{else}}
+        <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Discount table empty</div>
+    {{/if}}
+</div>
