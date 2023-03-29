@@ -172,41 +172,96 @@
         </div>
     </div>
 
-    <div id="screeningList" class="flexColumn" style="text-align:center;">
-        <div class="flexRow">
-            <div class="screeningDispTop1">Screening ID</div>
-            <div class="screeningDispTop2">Film ID</div>
-            <div class="screeningDispTop1">Room</div>
-            <div class="screeningDispTop2">Seats Booked</div>
-            <div class="screeningDispTop1" style="width:160px;">Date/Time</div>
+    <div class="flexRow" style="flex-wrap:wrap;margin-bottom:20px;">
+        <div id="screeningList" class="flexColumn" style="text-align:center;margin:10px;">
+            <div class="flexRow">
+                <div class="dispTop1">Screening ID</div>
+                <div class="dispTop2">Film ID</div>
+                <div class="dispTop1">Room</div>
+                <div class="dispTop2">Seats Booked</div>
+                <div class="dispTop1" style="width:160px;">Date/Time</div>
+            </div>
+            
+            <div class="flexRow">
+                <div class="disp1">{{screeningID}}</div>
+                <div class="disp2">{{filmID}}</div>
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{seatsBoked}}</div>
+                <div class="disp1"  style="width:160px;">{{showtime}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{screeningID}}</div>
+                <div class="disp2">{{filmID}}</div>
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{seatsBoked}}</div>
+                <div class="disp1"  style="width:160px;">{{showtime}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{screeningID}}</div>
+                <div class="disp2">{{filmID}}</div>
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{seatsBoked}}</div>
+                <div class="disp1"  style="width:160px;">{{showtime}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{screeningID}}</div>
+                <div class="disp2">{{filmID}}</div>
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{seatsBoked}}</div>
+                <div class="disp1"  style="width:160px;">{{showtime}}</div>
+            </div>
         </div>
-        <div class="flexRow">
-            <div class="screeningDisp1">2</div>
-            <div class="screeningDisp2">4</div>
-            <div class="screeningDisp1">4</div>
-            <div class="screeningDisp2">14</div>
-            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
+
+        <div id="roomList" class="flexColumn" style="text-align:center;margin:10px;">
+            <div class="flexRow">
+                <div class="dispTop1">Room ID</div>
+                <div class="dispTop2">Capacity</div>
+                <div class="dispTop1" style="width:140px;">Decommisioned</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{capacity}}</div>
+                <div class="disp1" style="width:140px;">{{decommisioned}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{capacity}}</div>
+                <div class="disp1" style="width:140px;">{{decommisioned}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{capacity}}</div>
+                <div class="disp1" style="width:140px;">{{decommisioned}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{capacity}}</div>
+                <div class="disp1" style="width:140px;">{{decommisioned}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{capacity}}</div>
+                <div class="disp1" style="width:140px;">{{decommisioned}}</div>
+            </div>
         </div>
-        <div class="flexRow">
-            <div class="screeningDisp1">2</div>
-            <div class="screeningDisp2">4</div>
-            <div class="screeningDisp1">4</div>
-            <div class="screeningDisp2">14</div>
-            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
-        </div>
-        <div class="flexRow">
-            <div class="screeningDisp1">2</div>
-            <div class="screeningDisp2">4</div>
-            <div class="screeningDisp1">4</div>
-            <div class="screeningDisp2">14</div>
-            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
-        </div>
-        <div class="flexRow">
-            <div class="screeningDisp1">2</div>
-            <div class="screeningDisp2">4</div>
-            <div class="screeningDisp1">4</div>
-            <div class="screeningDisp2">14</div>
-            <div class="screeningDisp1"  style="width:160px;">2021-08-14 15:30</div>
+
+        <div id="discountList" class="flexColumn" style="text-align:center;margin:10px;">
+            <div class="flexRow">
+                <div class="dispTop1">Code</div>
+                <div class="dispTop2">Discount</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{code}}</div>
+                <div class="disp2">{{fractionDiscount}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{code}}</div>
+                <div class="disp2">{{fractionDiscount}}</div>
+            </div>
+            <div class="flexRow">
+                <div class="disp1">{{code}}</div>
+                <div class="disp2">{{fractionDiscount}}</div>
+            </div>
         </div>
     </div>
 </body>
