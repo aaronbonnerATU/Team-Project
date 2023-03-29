@@ -1,0 +1,68 @@
+label{
+    margin-bottom: 4px;
+    height:20px;
+    font-family:sans-serif;
+}
+
+input{
+    height:17px;
+}
+
+select{
+    height:22px;
+}
+
+h1{
+    font-size:30px;
+    font-family:sans-serif;
+}
+
+h3{
+    font-size:19px;
+    font-family:sans-serif;
+}
+
+.inputSubmit{
+    width:60px;
+    height:20px;
+    margin-top:3px;
+}
+
+.flexRow{
+    display:flex;
+    flex-direction:row;
+}
+
+.flexColumn{
+    display:flex;
+    flex-direction:column;
+}
+
+.flexColumnM{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin:auto;
+}
+
+.dispTop1{
+    width:100px;
+    height:20px;
+    background-color:rgb(100, 100, 100);
+}
+
+.dispTop1:nth-child(2n){
+    background-color:rgb(115, 115, 115);
+}
+
+.disp1{
+    width:100px;
+    height:20px;
+    background-color:rgb(130, 130, 130);
+}
+
+.disp2{
+    width:100px;
+    height:20px;
+    background-color:rgb(145, 145, 145);
+}

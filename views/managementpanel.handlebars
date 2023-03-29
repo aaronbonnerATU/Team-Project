@@ -1,26 +1,229 @@
-<link rel= "stylesheet" href ="./styles/managementpanel.css">
+<link rel="stylesheet" href="./styles/managementpanel.css">
 
+<div style="width:100%;height:50px;text-align:center;">
+    <h1>Cinema System - Management Panel</h1>
+</div>
 
+<div class="flexRow" style="flex-wrap:wrap;">
+    <div class="flexColumnM" style="width:250px;height:183px;">
+        <h3>Add Screening</h3>
+        <form action="/add-screening" method="POST">
+            <div class="flexRow">
+                <div class="flexColumn" style="align-items:flex-end;">
+                    <label for="filmIDINP">Film(ID): </label>
+                    <label for="roomIDINP">Room: </label>
+                    <label for="dateINP">Date: </label>
+                    <label for="timeINP">Time: </label>
+                </div>
 
-<div id="screeningList" class="flexColumn" style="text-align:center;">
-    <div class="flexRow">
-        <div class="dispTop1">Screening ID</div>
-        <div class="dispTop2">Film ID</div>
-        <div class="dispTop1">Room</div>
-        <div class="dispTop2">Seats Booked</div>
-        <div class="dispTop1" style="width:160px;">Date/Time</div>
+                <div class="flexColumn" style="margin-left:4px;">
+                    <input id="filmIDINP" name="filmID" type="text" style="margin-bottom:1px;">
+                    <input id="roomIDINP" name="roomID" type="text" style="margin-bottom:1px;">
+
+                    <input id="dateINP" name="date" type="date" style="margin-bottom:1px;">
+                    <input id="timeINP" name="time" type="time" list="time-list" style="margin-bottom:1px;">
+                    <datalist id="time-list">
+                        <option value="09:00" datatype="time">
+                        <option value="09:15" datatype="time">
+                        <option value="09:30" datatype="time">
+                        <option value="09:45" datatype="time">
+
+                        <option value="10:00" datatype="time">
+                        <option value="10:15" datatype="time">
+                        <option value="10:30" datatype="time">
+                        <option value="10:45" datatype="time">
+
+                        <option value="11:00" datatype="time">
+                        <option value="11:15" datatype="time">
+                        <option value="11:30" datatype="time">
+                        <option value="11:45" datatype="time">
+
+                        <option value="12:00" datatype="time">
+                        <option value="12:15" datatype="time">
+                        <option value="12:30" datatype="time">
+                        <option value="12:45" datatype="time">
+
+                        <option value="13:00" datatype="time">
+                        <option value="13:15" datatype="time">
+                        <option value="13:30" datatype="time">
+                        <option value="13:45" datatype="time">
+
+                        <option value="14:00" datatype="time">
+                        <option value="14:15" datatype="time">
+                        <option value="14:30" datatype="time">
+                        <option value="14:45" datatype="time">
+
+                        <option value="15:00" datatype="time">
+                        <option value="15:15" datatype="time">
+                        <option value="15:30" datatype="time">
+                        <option value="15:45" datatype="time">
+
+                        <option value="16:00" datatype="time">
+                        <option value="16:15" datatype="time">
+                        <option value="16:30" datatype="time">
+                        <option value="16:45" datatype="time">
+
+                        <option value="17:00" datatype="time">
+                        <option value="17:15" datatype="time">
+                        <option value="17:30" datatype="time">
+                        <option value="17:45" datatype="time">
+
+                        <option value="18:00" datatype="time">
+                        <option value="18:15" datatype="time">
+                        <option value="18:30" datatype="time">
+                        <option value="18:45" datatype="time">
+
+                        <option value="19:00" datatype="time">
+                        <option value="19:15" datatype="time">
+                        <option value="19:30" datatype="time">
+                        <option value="19:45" datatype="time">
+
+                        <option value="20:00" datatype="time">
+                        <option value="20:15" datatype="time">
+                        <option value="20:30" datatype="time">
+                        <option value="20:45" datatype="time">
+
+                        <option value="21:00" datatype="time">
+                        <option value="21:15" datatype="time">
+                        <option value="21:30" datatype="time">
+                        <option value="21:45" datatype="time">
+
+                        <option value="22:00" datatype="time">
+                        <option value="22:15" datatype="time">
+                        <option value="22:30" datatype="time">
+                        <option value="22:45" datatype="time">
+
+                        <option value="23:00" datatype="time">
+                        <option value="23:15" datatype="time">
+                        <option value="23:30" datatype="time">
+                        <option value="23:45" datatype="time">
+                    </datalist>
+                </div>
+            </div>
+            <input type="submit" class="inputSubmit" style="margin-left:85px;">
+        </form>
     </div>
-    {{#if screenings}}
+
+    <div class="flexColumnM" style="width:240px;height:135px;">
+        <h3>Delete Screening</h3>
+        <form action="/remove-screening" method="post">
+            <div class="flexRow">
+                <div class="flexColumn" style="align-items:flex-end;">
+                    <label for="optionCHSl">Option:</label>
+                    <label for="deleteINP">Enter: </label>
+                </div>
+
+                <div class="flexColumn" style="margin-left:4px;">
+                    <select id="optionCHSl" name="optionCH" style="margin-bottom:1px;">
+                        <option value="screeningID">Screening ID</option>
+                        <option value="filmID">Film ID</option>
+                        <option value="roomID">Room ID</option>
+                    </select>
+                    <input id="deleteINP" name="deleteID" style="margin-bottom:1px;">
+                </div>
+            </div>
+            <input type="submit" class="inputSubmit" style="margin-left:80px;">
+        </form>
+    </div>
+
+    <div class="flexColumnM" style="width:320px;height:135px;">
+        <h3>Add Discount Code</h3>
+        <form action="/add-discount" method="post">
+            <div class="flexRow">
+                <div class="flexColumn" style="align-items:flex-end;">
+                    <label for="discountCodeINP">Discount Code: </label>
+                    <label for="discountFractionINP">Discount Fraction: </label>
+                </div>
+
+                <div class="flexColumn" style="margin-left:4px;">
+                    <input id="discountCodeINP" name="discountCodeINP" type="text" style="margin-bottom:1px;">
+                    <input id="discountFractionINP" name="discountFractionINP" type="text" style="margin-bottom:1px;">
+                </div>
+            </div>
+            <input type="submit" class="inputSubmit" style="margin-left:120px;">
+        </form>
+    </div>
+
+    <div class="flexColumnM" style="width:300px;height:110px;">
+        <h3>Delete Discount Code</h3>
+        <form action="/remove-discount" method="post">
+            <div class="flexRow">
+                <label for="discountCodeDelINP" style="margin-right:2px;">Discount Code: </label>
+                <input id="discountCodeDelINP" name="discountCodeDelINP" type="text">
+            </div>
+            <input type="submit" class="inputSubmit" style="margin-left:110px;">
+        </form>
+    </div>
+
+    <div class="flexColumnM" style="width:270px;height:110px;">
+        <h3>De/Re-comission Screen</h3>
+        <form action="/de-re-comission-screen" method="POST">
+            <label for="booScreen">Room ID: </label>
+            <input id="booScreen" name="booScreen" type="text">
+            <input type="submit" class="inputSubmit" style="margin-left:100px;">
+        </form>
+    </div>
+</div>
+
+<div class="flexRow" style="flex-wrap:wrap;margin-bottom:20px;">
+    <div id="screeningList" class="flexColumn" style="text-align:center;margin:10px;">
+        <div class="flexRow">
+            <div class="dispTop1">Screening ID</div>
+            <div class="dispTop2">Film Title</div>
+            <div class="dispTop1">Film ID</div>
+            <div class="dispTop2">Room</div>
+            <div class="dispTop1">Seats Booked</div>
+            <div class="dispTop2" style="width:160px;">Date/Time</div>
+        </div>
+        {{#if screenings}}
         {{#each screenings}}
         <div class="flexRow">
             <div class="disp1">{{screeningID}}</div>
             <div class="disp2">{{filmID}}</div>
-            <div class="disp1">{{roomID}}</div>
-            <div class="disp2">{{seatsBoked}}</div>
-            <div class="disp1"  style="width:160px;">{{showtime}}</div>
+            <div class="disp1">{{title}}</div>
+            <div class="disp2">{{roomID}}</div>
+            <div class="disp1">{{seatsBooked}}</div>
+            <div class="disp2" style="width:160px;">{{showtime}}</div>
         </div>
         {{/each}}
-    {{else}}
+        {{else}}
         <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Screenings table empty</div>
-    {{/if}}
+        {{/if}}
+    </div>
+
+    <div id="roomList" class="flexColumn" style="text-align:center;margin:10px;">
+        <div class="flexRow">
+            <div class="dispTop1">Room ID</div>
+            <div class="dispTop2">Capacity</div>
+            <div class="dispTop1" style="width:140px;">Decommisioned</div>
+        </div>
+        {{#if rooms}}
+        {{#each rooms}}
+        <div class="flexRow">
+            <div class="disp1">{{roomID}}</div>
+            <div class="disp2">{{capacity}}</div>
+            <div class="disp1" style="width:140px;">{{decomissioned}}</div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Room table empty</div>
+        {{/if}}
+    </div>
+
+    <div id="discountList" class="flexColumn" style="text-align:center;margin:10px;">
+        <div class="flexRow">
+            <div class="dispTop1">Code</div>
+            <div class="dispTop2">Discount</div>
+        </div>
+        {{#if discounts}}
+        {{#each discounts}}
+        <div class="flexRow">
+            <div class="disp1">{{code}}</div>
+            <div class="disp2">{{fractionDiscount}}</div>
+        </div>
+        {{/each}}
+        {{else}}
+        <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Discount table empty</div>
+        {{/if}}
+    </div>
 </div>

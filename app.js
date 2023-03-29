@@ -214,24 +214,32 @@ app.post('/remove-discount', function(req, res){
 //---------------------------
 //management and admin handlebars
 
-app.get("/show-screening-management",function(req, res){
-    rows = db.prepare("SELECT * FROM screenings");
-    res.render("managementpanel", {screenings: rows});
+app.get("/adminpanel",function(req, res){
+    let f;
+    if(req.query.filmID){
+        f = db.prepare("SELECT * FROM films where films.filmID = ?").all(req.query.filmID);
+    } else {
+        f = db.prepare("SELECT * FROM films").all();
+    }
+    res.render("adminpanel", {films: f});
 });
 
-app.get("/show-movies-management2",function(req, res){
-    rows = db.prepare("SELECT * FROM rooms");
-    res.render("managementpanel2", {rooms: rows});
-});
+app.get("/managementpanel",function(req, res){
+    let s;
+    if (req.query.filmID) {
+        s = db.prepare("SELECT screeningID, screenings.filmID, title, roomID, seatsBooked, showtime FROM screenings, films where films.filmID = screenings.filmID and films.filmID = ? order by showtime").all(req.query.filmID);
+    } else {
+        s = db.prepare("SELECT screeningID, screenings.filmID, title, roomID, seatsBooked, showtime FROM screenings, films where films.filmID = screenings.filmID order by showtime").all();      
+    }
 
-app.get("/show-movies-management3",function(req, res){
-    rows = db.prepare("SELECT * FROM discounts");
-    res.render("managementpanel3", {discounts: rows});
-});
-
-app.get("/show-movies-admin",function(req, res){
-    rows = db.prepare("SELECT * FROM movies");
-    res.render("managementpanel", {movies: rows});
+    let r = db.prepare("SELECT * FROM rooms").all();
+    r.forEach((el) => {el.decomissioned = el.decomissioned === 1 ? "Yes" : "No"}); 
+    
+    let d = db.prepare("SELECT * FROM discounts").all();
+    d.forEach((el) => {el.fractionDiscount = `${el.fractionDiscount * 100}%`});
+    
+    console.log({screenings: s, rooms: r, discounts: d});
+    res.render("managementpanel", {screenings: s, rooms: r, discounts: d});
 });
 
 //---------------------------
