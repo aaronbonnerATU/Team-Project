@@ -45,25 +45,25 @@ h3{
     margin:auto;
 }
 
-.screeningDispTop1{
+.dispTop1{
     width:100px;
     height:20px;
     background-color:rgb(100, 100, 100);
 }
 
-.screeningDispTop2{
+.dispTop2{
     width:100px;
     height:20px;
     background-color:rgb(115, 115, 115);
 }
 
-.screeningDisp1{
+.disp1{
     width:100px;
     height:20px;
     background-color:rgb(130, 130, 130);
 }
 
-.screeningDisp2{
+.disp2{
     width:100px;
     height:20px;
     background-color:rgb(145, 145, 145);
