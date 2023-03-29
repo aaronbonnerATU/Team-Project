@@ -211,13 +211,31 @@ app.post('/remove-discount', function(req, res){
     db.prepare("DELETE FROM discounts WHERE code=?").run(req.body.discountCodeDelINP);
 });
 
-app.get("/show-screening",function(res, req)){
-    rows = db.prepare("SELECT * FROM screenings");
-    res.render("", {screenings: rows});
-}
+//---------------------------
+//management and admin handlebars
 
+app.get("/show-screening-management",function(req, res){
+    rows = db.prepare("SELECT * FROM screenings");
+    res.render("managementpanel", {screenings: rows});
+});
+
+app.get("/show-movies-management2",function(req, res){
+    rows = db.prepare("SELECT * FROM rooms");
+    res.render("managementpanel2", {rooms: rows});
+});
+
+app.get("/show-movies-management3",function(req, res){
+    rows = db.prepare("SELECT * FROM discounts");
+    res.render("managementpanel3", {discounts: rows});
+});
+
+app.get("/show-movies-admin",function(req, res){
+    rows = db.prepare("SELECT * FROM movies");
+    res.render("managementpanel", {movies: rows});
+});
 
 //---------------------------
+
 
 let server = app.listen(5000, function () {
     console.log('Node server is running..');
