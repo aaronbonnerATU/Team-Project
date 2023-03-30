@@ -100,7 +100,7 @@ app.get('/ticket', function (req, res) {
             screening.qrData = qrData;
             screening.date = "01-01-2022";
             //console.table(film);
-            db.prepare("insert into tickets values (?,?)").run(Math.floor(Math.random()*1000000), ticketID);
+            db.prepare("insert into tickets values (?,?)").run(ticketID,screeningID);
             db.prepare("update screenings set seatsBooked=(seatsBooked+1) where screeningID = ?").run(screeningID);
             res.render("ticket", screening);
         }).catch( 
@@ -143,11 +143,15 @@ app.post('/add-new-movie', function(req, res){
     console.table(req.body);
 
     db.prepare("INSERT INTO films VALUES (?,?,?,?,?)").run(filmID, req.body.title, req.body.year, req.body.rating, req.body.description);
+
+    res.redirect("/adminpanel");
 });
 
 app.post('/delete-movie', function(req, res){
     db.prepare("DELETE FROM films WHERE title=?1 or filmID=?1").run({1:req.body.movieDelete});
     console.table(req.body);
+    
+    res.redirect("/adminpanel");
 });
 //---------------------------
 
@@ -167,10 +171,16 @@ app.post('/de-re-comission-screen', function (req, res){
         db.prepare("UPDATE rooms SET decomissioned=0 WHERE roomID=?").run(req.body.booScreen);
     }
 
+    if(check[0].decomissioned === 0){
+        db.prepare("DELETE FROM screenings WHERE roomID=?").run(req.body.booScreen);
+    }
+
     
     let result = db.prepare("SELECT * FROM rooms WHERE roomID=?1").all({1:req.body.booScreen});
     console.table(result);
     console.log(result);
+
+    res.redirect("/managementpanel");
 });
 
 app.post('/add-screening', function(req, res){
@@ -180,9 +190,21 @@ app.post('/add-screening', function(req, res){
         screeningID = 1 + lastRow[0].screeningID;
     }
     
-    //console.table(req.body);
+    let decCheck = db.prepare("SELECT roomID FROM rooms WHERE decomissioned=0").all();
 
-    db.prepare("INSERT INTO screenings VALUES (?,?,?,?,?)").run(screeningID, req.body.filmID, req.body.roomID, 0, req.body.date+" "+req.body.time);
+    console.log(decCheck);
+    console.table(decCheck);
+    if (decCheck.length === 0) {
+        return;
+    }
+
+    //console.table(req.body);
+    if(decCheck[0].roomID !== undefined){
+        db.prepare("INSERT INTO screenings VALUES (?,?,?,?,?)").run(screeningID, req.body.filmID, req.body.roomID, 0, req.body.date+" "+req.body.time);
+    }
+    
+    
+    res.redirect("/managementpanel");
 });
 
 app.post('/remove-screening', function(req, res){
@@ -201,14 +223,18 @@ app.post('/remove-screening', function(req, res){
     //console.log(req.body);
     //console.log();
     //console.table(req.body);
+
+    res.redirect("/managementpanel");
 });
 
 app.post('/add-discount', function(req, res){
     db.prepare("INSERT INTO discounts VALUES (?,?)").run(req.body.discountCodeINP, req.body.discountFractionINP);
+    res.redirect("/managementpanel");
 });
 
 app.post('/remove-discount', function(req, res){
     db.prepare("DELETE FROM discounts WHERE code=?").run(req.body.discountCodeDelINP);
+    res.redirect("/managementpanel");
 });
 
 //---------------------------
@@ -221,6 +247,7 @@ app.get("/adminpanel",function(req, res){
     } else {
         f = db.prepare("SELECT * FROM films").all();
     }
+
     res.render("adminpanel", {films: f});
 });
 
