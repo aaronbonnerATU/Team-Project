@@ -38,6 +38,12 @@ h3{
     flex-direction:column;
 }
 
+.flexColumnA{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
 .flexColumnM{
     display:flex;
     flex-direction:column;
