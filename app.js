@@ -190,7 +190,7 @@ app.post('/add-screening', function(req, res){
         screeningID = 1 + lastRow[0].screeningID;
     }
     
-    let decCheck = db.prepare("SELECT roomID FROM rooms WHERE decomissioned=0").all();
+    let decCheck = db.prepare("SELECT roomID FROM rooms WHERE decomissioned=0 and roomID = ?").all(req.body.roomID);
 
     console.log(decCheck);
     console.table(decCheck);
