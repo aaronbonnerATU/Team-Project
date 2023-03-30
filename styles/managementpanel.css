@@ -5,7 +5,7 @@ label{
 }
 
 input{
-    height:17px;
+    height:22px;
 }
 
 select{
@@ -45,26 +45,34 @@ h3{
     margin:auto;
 }
 
-.dispTop1{
+.dispTop1 {
+    border: 1px black solid;
     width:100px;
     height:20px;
-    background-color:rgb(100, 100, 100);
+    color:white;
+    background-color:rgb(60, 76, 170);
 }
 
 .dispTop2{
+    border: 1px black solid;
     width:100px;
     height:20px;
-    background-color:rgb(115, 115, 115);
+    color:white;
+    background-color:rgb(60, 86, 160);
 }
 
 .disp1{
+    border: 1px black solid;
     width:100px;
     height:20px;
-    background-color:rgb(130, 130, 130);
+    color:white;
+    background-color:rgb(60, 96, 150);
 }
 
 .disp2{
+    border: 1px black solid;
     width:100px;
     height:20px;
-    background-color:rgb(145, 145, 145);
+    color:white;
+    background-color:rgb(60, 101, 145);
 }
