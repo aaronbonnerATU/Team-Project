@@ -44,23 +44,23 @@
     </form>
 </div>
 
-<div id="movieList" class="flexColumn" style="text-align:center;">
+<div id="movieList" class="flexColumn" style="text-align:center;margin:5px;">
     <div class="flexRow">
         <div class="dispTop1">Film ID</div>
-        <div class="dispTop2">Title</div>
+        <div class="dispTop2" style="width:300px;">Title</div>
         <div class="dispTop1">Year</div>
         <div class="dispTop2">Rating</div>
-        <div class="dispTop1" style="width:260px;">Description</div>
+        <div class="dispTop1" style="width:100%;">Description</div>
     </div>
     
     {{#if films}}
         {{#each films}}
         <div class="flexRow">
             <div class="disp1">{{filmID}}</div>
-            <div class="disp2">{{title}}</div>
+            <div class="disp2" style="width:300px;">{{title}}</div>
             <div class="disp1">{{year}}</div>
             <div class="disp2">{{rating}}</div>
-            <div class="disp1"  style="width:260px; overflow: hidden;   text-overflow: ellipsis;  white-space: nowrap;">{{description}}</div>
+            <div class="disp1"  style="width:100%;overflow-y:scroll;overflow-x: none; text-overflow:ellipsis;">{{description}}</div>
         </div>
         {{/each}}
     {{else}}

@@ -168,22 +168,22 @@
 <div class="flexRow" style="flex-wrap:wrap;margin-bottom:20px;">
     <div id="screeningList" class="flexColumn" style="text-align:center;margin:10px;">
         <div class="flexRow">
-            <div class="dispTop1">Screening ID</div>
-            <div class="dispTop2">Film Title</div>
-            <div class="dispTop1">Film ID</div>
+            <div class="dispTop1" style="width:120px;">Screening ID</div>
+            <div class="dispTop2">Film ID</div>
+            <div class="dispTop1">Film Title</div>
             <div class="dispTop2">Room</div>
-            <div class="dispTop1">Seats Booked</div>
-            <div class="dispTop2" style="width:160px;">Date/Time</div>
+            <div class="dispTop1" style="width:120px;">Seats Booked</div>
+            <div class="dispTop2" style="width:170px;">Date/Time</div>
         </div>
         {{#if screenings}}
         {{#each screenings}}
         <div class="flexRow">
-            <div class="disp1">{{screeningID}}</div>
+            <div class="disp1" style="width:120px;">{{screeningID}}</div>
             <div class="disp2">{{filmID}}</div>
             <div class="disp1">{{title}}</div>
             <div class="disp2">{{roomID}}</div>
-            <div class="disp1">{{seatsBooked}}</div>
-            <div class="disp2" style="width:160px;">{{showtime}}</div>
+            <div class="disp1" style="width:120px;">{{seatsBooked}}</div>
+            <div class="disp2" style="width:170px;">{{showtime}}</div>
         </div>
         {{/each}}
         {{else}}
@@ -195,7 +195,7 @@
         <div class="flexRow">
             <div class="dispTop1">Room ID</div>
             <div class="dispTop2">Capacity</div>
-            <div class="dispTop1" style="width:140px;">Decommisioned</div>
+            <div class="dispTop1" style="width:140px;">Decomissioned</div>
         </div>
         {{#if rooms}}
         {{#each rooms}}
