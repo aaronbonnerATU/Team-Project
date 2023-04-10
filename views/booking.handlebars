@@ -1,25 +1,26 @@
-    <link rel= "stylesheet" href ="styles/booking.css">
-    
-    <div id="makeBookingBanner">
-      <h1>MAKE A BOOKING</h1>
-    </div>
+<link rel="stylesheet" href="styles/booking.css">
 
-  <div id="detailsOuter">
+<div id="makeBookingBanner">
+  <h1>MAKE A BOOKING</h1>
+</div>
+
+<div id="detailsOuter">
   <div class="detailsContainer">
 
-    <img src="images/poster1.png" class="image">
-    
+    <img src="images/posters/{{poster}}" class="image">
+
     <div class="filmDescriptionContainer">
       <div id="filmTitleRating">
         <p class="filmTitle">{{title}}</p>
-        <img src="images/{{rating}} Rating.png" class="imgRating">  
+        <img src="images/{{rating}} Rating.png" class="imgRating">
       </div>
       <p class="filmSummary">{{description}}</p>
       <a href="screenings?film={{filmID}}"><button id="makeBooking" class="btn">Book Movie</button></a>
-      
     </div>
   </div>
-    
+  <div id="detailsTrailer">
+      <iframe width="100%" height="100%" src="{{trailer}}"></iframe>
   </div>
+</div>
 
-  <script src="scripts/booking.js"></script>
+<script src="scripts/booking.js"></script>

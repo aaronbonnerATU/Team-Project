@@ -19,9 +19,9 @@
     }
 
 .detailsContainer {
+  border-bottom: 2px solid rgb(195, 195, 195);
     max-width: 800px;
     align-self: center;
-    border-bottom: 5px solid rgb(0, 0, 0);
     display: flex;
     width: 100%;
     justify-content: center;
@@ -29,11 +29,13 @@
     gap: 5%;
   }
 
-
   #detailsOuter {
+
+
     display: flex;
-    width: 100%;
+    max-width: 100%;
     flex-direction: column;
+    align-items: center;
   }
   
   /* Button CSS*/
@@ -67,10 +69,15 @@
     justify-content: center;
   }
 
-
-
- 
-
+#detailsTrailer {
+  width: 80%;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  border-bottom: 5px solid rgb(0, 0, 0);
+  border-top: 2px solid rgb(82, 82, 82);
+}
 
   #makeBookingBanner {
     display: flex;
