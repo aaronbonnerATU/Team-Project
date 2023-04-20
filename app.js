@@ -177,7 +177,6 @@ app.post('/delete-movie', function(req, res){
 //---------------------------
 //code for management panel
 app.post('/de-re-comission-screen', function (req, res){
-
     console.log(req.body.booScreen);
 
     const check = db.prepare("SELECT decomissioned FROM rooms WHERE roomID=?").all(req.body.booScreen);
@@ -199,7 +198,7 @@ app.post('/de-re-comission-screen', function (req, res){
     console.table(result);
     console.log(result);
 
-    res.redirect("/managementpanel");
+    res.redirect("/managementpanelDerecomission");
 });
 
 app.post('/add-screening', function(req, res){
@@ -222,8 +221,7 @@ app.post('/add-screening', function(req, res){
         db.prepare("INSERT INTO screenings VALUES (?,?,?,?,?)").run(screeningID, req.body.filmID, req.body.roomID, 0, req.body.date+" "+req.body.time);
     }
     
-    
-    res.redirect("/managementpanel");
+    res.redirect("/managementpanelScreening");
 });
 
 app.post('/remove-screening', function(req, res){
@@ -243,19 +241,18 @@ app.post('/remove-screening', function(req, res){
     //console.log();
     //console.table(req.body);
 
-    res.redirect("/managementpanel");
+    res.redirect("/managementpanelScreening");
 });
 
 app.post('/add-discount', function(req, res){
     db.prepare("INSERT INTO discounts VALUES (?,?)").run(req.body.discountCodeINP, req.body.discountFractionINP);
-    res.redirect("/managementpanel");
+    res.redirect("/managementpanelDiscount");
 });
 
 app.post('/remove-discount', function(req, res){
     db.prepare("DELETE FROM discounts WHERE code=?").run(req.body.discountCodeDelINP);
-    res.redirect("/managementpanel");
+    res.redirect("/managementpanelDiscount");
 });
-
 //---------------------------
 //management and admin handlebars
 
@@ -270,23 +267,44 @@ app.get("/adminpanel",function(req, res){
     res.render("adminpanel", {films: f});
 });
 
-app.get("/managementpanel",function(req, res){
+app.get("/managementpanelScreenings",function(req, res){
     let s;
     if (req.query.filmID) {
         s = db.prepare("SELECT screeningID, screenings.filmID, title, roomID, seatsBooked, showtime FROM screenings, films where films.filmID = screenings.filmID and films.filmID = ? order by showtime").all(req.query.filmID);
     } else {
         s = db.prepare("SELECT screeningID, screenings.filmID, title, roomID, seatsBooked, showtime FROM screenings, films where films.filmID = screenings.filmID order by showtime").all();      
     }
+    console.log({screenings: s});
 
+    const dateDate = new Date();
+    let yyyy = dateDate.getFullYear();
+    let mm = dateDate.getMonth() + 1; // Months start at 0!
+    let dd = dateDate.getDate();
+
+    if (dd < 10) dd = "0" + dd;
+    if (mm < 10) mm = "0" + mm;
+
+    let date = yyyy + "-" + mm + "-" + dd;
+    
+    res.render("managementpanelScreenings", {date,screenings: s});
+});
+
+app.get("/managementpanelDerecomission",function(req, res){
     let r = db.prepare("SELECT * FROM rooms").all();
     r.forEach((el) => {el.decomissioned = el.decomissioned === 1 ? "Yes" : "No"}); 
     
+    console.log({rooms: r});
+    res.render("managementpanelDerecomission", {rooms: r});
+});
+
+app.get("/managementpanelDiscount",function(req, res){
     let d = db.prepare("SELECT * FROM discounts").all();
     d.forEach((el) => {el.fractionDiscount = `${el.fractionDiscount * 100}%`});
     
-    console.log({screenings: s, rooms: r, discounts: d});
-    res.render("managementpanel", {screenings: s, rooms: r, discounts: d});
+    console.log({discounts: d});
+    res.render("managementpanelDiscount", {discounts: d});
 });
+
 
 //---------------------------
 
