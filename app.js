@@ -11,6 +11,7 @@ db.pragma('journal_mode = WAL');
 let app = express();
 
 let bodyParser = require("body-parser");
+const { LIMIT_COMPOUND_SELECT } = require('sqlite3');
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.engine('handlebars', expressHandlebars.engine());
@@ -84,6 +85,7 @@ app.get('/book', function (req, res) {
 
 app.get('/ticket', function (req, res) {
     let screeningID = req.query.screening;
+    let ticketsBought = req.query.bought;
     let screening;
 
     screening = db.prepare("select title, rating, showtime from screenings, films where screeningID = ? and screenings.filmID = films.filmID").all(screeningID);
@@ -91,23 +93,36 @@ app.get('/ticket', function (req, res) {
         res.redirect("/");
         return;
     }
+    console.table(screening)
 
-    screening = screening[0];
-    let ticketID = uuidv4();
+    let tickets = []
+    let ticketPromises = []
+    for(i=0; i<ticketsBought; i++) {
+        let uuid = uuidv4();
+        tickets.push({...screening[0]});
+        tickets[tickets.length-1].qrData = uuid;
+        ticketPromises.push(qrcode.toDataURL(tickets[tickets.length-1].qrData));
+    }
 
-    qrcode.toDataURL(ticketID).then(
-        (qrData) => {
-            screening.qrData = qrData;
-            screening.date = "01-01-2022";
-            //console.table(film);
-            db.prepare("insert into tickets values (?,?)").run(ticketID,screeningID);
-            db.prepare("update screenings set seatsBooked=(seatsBooked+1) where screeningID = ?").run(screeningID);
-            res.render("ticket", screening);
+    Promise.all(ticketPromises).then(
+        (values) => {
+            tickets.forEach((t) => db.prepare("INSERT INTO tickets values (?, ?)").run(screeningID, t.qrData));
+            for(i=0;i<tickets.length;i++) {
+                console.log(tickets[i].qrData);
+                tickets[i].qrData = values[i];
+            }
+            console.table(tickets, ["title", "rating", "showtime"])
+            console.log(typeof(ticketsBought));
+            db.prepare("UPDATE screenings SET seatsBooked = (seatsBooked + ?) WHERE screeningID = ?").run(ticketsBought,screeningID);
+            res.render("ticket", {tickets:tickets});
+            
         }).catch( 
             (err) => {
             console.log(err);
             res.redirect("/");    
         });
+   
+        
 });
 
 app.get('/payment', function(req, res){
