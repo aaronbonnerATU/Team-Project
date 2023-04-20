@@ -1,0 +1,66 @@
+<link rel= "stylesheet" href ="./styles/managementpanel.css">
+
+<div style="width:100%;height:80px;text-align:center;background-color:rgb(60, 96, 150);color:white;">
+    <div style="padding:3px;">
+        <h1>Cinema System - Management Panel</h1>
+    </div>
+</div>
+
+<ul class="links">
+    <li><a href="http://localhost:5000/managementpanelScreenings">Screenings</a></li>
+    <li><a href="http://localhost:5000/managementpanelDerecomission">De/Re-comission Screens</a></li>
+    <li><a href="http://localhost:5000/managementpanelDiscount">Discounts</a></li>
+</ul>
+
+<div>
+    <div class="flexColumnM">
+        <div class="flexRow" style="gap:40px;">
+            <div class="flexColumnA" style="width:320px;height:135px;">
+                <h3>Add Discount Code</h3>
+                <form action="/add-discount" method="post">
+                    <div class="flexRow">
+                        <div class="flexColumn" style="align-items:flex-end;">
+                            <label for="discountCodeINP">Discount Code: </label>
+                            <label for="discountFractionINP">Discount Fraction: </label>
+                        </div>
+
+                        <div class="flexColumn" style="margin-left:4px;">
+                            <input id="discountCodeINP" name="discountCodeINP" type="text" style="margin-bottom:1px;">
+                            <input id="discountFractionINP" name="discountFractionINP" type="text"
+                                style="margin-bottom:1px;">
+                        </div>
+                    </div>
+                    <input type="submit" class="inputSubmit" style="margin-left:120px;">
+                </form>
+            </div>
+
+            <div class="flexColumnA" style="width:300px;height:110px;">
+                <h3>Delete Discount Code</h3>
+                <form action="/remove-discount" method="post">
+                    <div class="flexRow">
+                        <label for="discountCodeDelINP" style="margin-right:2px;">Discount Code: </label>
+                        <input id="discountCodeDelINP" name="discountCodeDelINP" type="text">
+                    </div>
+                    <input type="submit" class="inputSubmit" style="margin-left:110px;">
+                </form>
+            </div>
+        </div>
+
+        <div id="roomList" class="flexColumn" style="text-align:center;margin:10px;">
+            <div class="flexRow">
+                <div class="dispTop1">Code</div>
+                <div class="dispTop2">Discount</div>
+            </div>
+            {{#if discounts}}
+            {{#each discounts}}
+            <div class="flexRow">
+                <div class="disp1">{{code}}</div>
+                <div class="disp2">{{fractionDiscount}}</div>
+            </div>
+            {{/each}}
+            {{else}}
+            <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Discount table empty</div>
+            {{/if}}
+        </div>
+    </div>
+</div>

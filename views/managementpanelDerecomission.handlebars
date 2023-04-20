@@ -1,0 +1,44 @@
+<link rel= "stylesheet" href ="./styles/managementpanel.css">
+
+<div style="width:100%;height:80px;text-align:center;background-color:rgb(60, 96, 150);color:white;">
+    <div style="padding:3px;">
+        <h1>Cinema System - Management Panel</h1>
+    </div>
+</div>
+
+<ul class="links">
+    <li><a href="http://localhost:5000/managementpanelScreenings">Screenings</a></li>
+    <li><a href="http://localhost:5000/managementpanelDerecomission">De/Re-comission Screens</a></li>
+    <li><a href="http://localhost:5000/managementpanelDiscount">Discounts</a></li>
+</ul>
+
+<div>
+    <div class="flexColumnM">
+        <div class="flexColumnM" style="width:270px;height:110px;">
+            <h3>De/Re-comission Screen</h3>
+            <form action="/de-re-comission-screen" method="POST">
+                <label for="booScreen">Room ID: </label>
+                <input id="booScreen" name="booScreen" type="text">
+                <input type="submit" class="inputSubmit" style="margin-left:100px;">
+            </form>
+        </div>
+        <div id="discountList" class="flexColumn" style="text-align:center;margin:10px;">
+            <div class="flexRow">
+                <div class="dispTop1">Room ID</div>
+                <div class="dispTop2">Capacity</div>
+                <div class="dispTop1" style="width:140px;">Decomissioned</div>
+            </div>
+            {{#if rooms}}
+            {{#each rooms}}
+            <div class="flexRow">
+                <div class="disp1">{{roomID}}</div>
+                <div class="disp2">{{capacity}}</div>
+                <div class="disp1" style="width:140px;">{{decomissioned}}</div>
+            </div>
+            {{/each}}
+            {{else}}
+            <div style="width:560px;height:20px;background-color:rgb(160, 160, 160);">Room table empty</div>
+            {{/if}}
+        </div>
+    </div>
+</div>
