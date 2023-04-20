@@ -1,0 +1,123 @@
+/*Header part*/
+.text {
+    text-align:center;
+    font-size:30px;
+    font-family:sans-serif;
+  }
+
+  body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #Price {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(27, 38, 97);
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+  }
+  
+  /*Design of Header links*/
+  .links {
+    color: rgb(0, 0, 0);
+    margin: 0;
+    border: 3px solid rgb(255, 255, 255);
+    padding: 0;
+    text-align: center;
+    list-style-type: none;
+    text-decoration: none;
+    font-family:sans-serif;
+    
+  }
+  
+  .links li a{
+    color: rgb(0, 0, 0);
+    list-style-type: none;
+    text-decoration: none;
+    
+  }
+  .links li {
+    display: inline-block;
+    font-size: 15px;
+    padding: 20px;
+  }
+  
+  
+  .links li a:visited {
+    color: rgb(0, 0, 0);
+  
+  }
+  
+  .links li a:hover {
+    color: rgb(95, 204, 95);
+  }
+  
+  .links li a:active {
+    color: hotpink;
+  }
+
+/*Design of Price Table*/
+
+
+.container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%;
+}
+
+
+table {
+    width: 100%;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr {
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+td, th {
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+/*table.striped>tbody>tr>td {
+    border-radius: 0;
+}*/
+ 
+table.striped>tbody>tr:nth-child(odd) {
+    background-color: rgba(242,242,242,0.5);
+    
+}
+
+table.striped tr {
+    border-bottom: none;
+}
+ .right-align
+ {
+    text-align: right;
+ }
+  .Footer {
+    color:black;
+    text-align:center;
+    font-family:sans-serif;
+    margin-top:auto;
+    margin-bottom:50px;
+    line-height: 1.8;
+  } 

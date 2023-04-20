@@ -1,0 +1,75 @@
+@import url("main.css");
+@import url("films.css");
+
+#viewTicketBanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(27, 38, 97);
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+  }
+
+  .viewticketContainer {
+    align-self: center;
+    border-bottom: 5px solid rgb(0, 0, 0);
+    border-top: 5px solid rgb(0, 0, 0);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5%;
+  }
+
+  .ticketDate {
+    letter-spacing:0.2em;
+    font-family:avenir-lt-w01_85-heavy1475544,sans-serif;
+    font-size:20px;
+    font-weight: bold;
+    color: black;
+  }
+
+  .Coming_Soon {
+    text-align:center;
+    margin: 5px;
+    background-color: rgb(27, 38, 97);
+    color:aliceblue;
+    overflow: hidden;
+    font-family: sans-serif;
+
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+    filter:blur(0px);
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .Footer {
+    color:black;
+    text-align:center;
+    margin-inline:500px;
+    font-family:sans-serif;
+    margin-bottom:50px;
+    line-height: 1.8;
+  }
+
+  #qrcode {
+    min-width: 400px;
+  }

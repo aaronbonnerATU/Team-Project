@@ -23,6 +23,10 @@ app.get('/', function (req, res) {
     res.render("home");
 });
 
+app.get('/comingsoon', function (req, res) {
+    res.render("comingsoon");
+});
+
 app.get('/films', function (req, res) {
     let searchTerm = req.query.search;
     let rows;
