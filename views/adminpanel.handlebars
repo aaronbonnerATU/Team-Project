@@ -11,14 +11,20 @@
         <div style="display:flex;flex-direction:row;">
             <div class="flexColumn" style="align-items:flex-end;">
                 <label for="titleINP">Title:</label>
+                <label for="durationINP">Duration (minutes):</label>
                 <label for="yearINP">Year:</label>
+                <label for="posterINP">Poster:</label>
+                <label for="trailerINP">Trailer:</label>
                 <label for="ratingINP">Rating:</label>
                 <label for="descriptionINP">Description:</label>
             </div>
 
             <div class="flexColumn" style="margin-left:3px;">
                 <input id="titleINP" name="title" type="text">
+                <input id="durationINP" name="duration" type="text">
                 <input id="yearINP" name="year" type="text">
+                <input id="posterINP" name="poster" type="text">
+                <input id="trailerINP" name="trailer" type="text">
                 <select id="ratingINP" name="rating" style="width:177px;">
                     <option value="G">G</option>
                     <option value="PG">PG</option>
@@ -28,6 +34,7 @@
                     <option value="18">18</option>
                 </select>
                 <textarea id="descriptionINP" name="description" style="height:60px;width:171px;"></textarea>
+
                 <input type="submit" class="inputSubmit">
             </div>
         </div>
@@ -48,9 +55,10 @@
     <div class="flexRow">
         <div class="dispTop1">Film ID</div>
         <div class="dispTop2" style="width:300px;">Title</div>
-        <div class="dispTop1">Year</div>
-        <div class="dispTop2">Rating</div>
-        <div class="dispTop1" style="width:100%;">Description</div>
+        <div class="dispTop1" style="width:110px;">Duration</div>
+        <div class="dispTop2">Year</div>
+        <div class="dispTop1">Rating</div>
+        <div class="dispTop2" style="width:100%;">Description</div>
     </div>
     
     {{#if films}}
@@ -58,9 +66,10 @@
         <div class="flexRow">
             <div class="disp1">{{filmID}}</div>
             <div class="disp2" style="width:300px;">{{title}}</div>
-            <div class="disp1">{{year}}</div>
-            <div class="disp2">{{rating}}</div>
-            <div class="disp1"  style="width:100%;overflow-y:scroll;overflow-x: none; text-overflow:ellipsis;">{{description}}</div>
+            <div class="disp1" style="width:110px;">{{duration}}</div>
+            <div class="disp2">{{year}}</div>
+            <div class="disp1">{{rating}}</div>
+            <div class="disp2"  style="width:100%;overflow-y:scroll;overflow-x: none; text-overflow:ellipsis;">{{description}}</div>
         </div>
         {{/each}}
     {{else}}
