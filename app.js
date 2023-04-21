@@ -133,7 +133,7 @@ app.get('/payment', function(req, res){
     let screeningID = req.query.screening;
     let screening;
 
-    screening = db.prepare("select films.filmID, screeningID, title, rating, showtime, description, poster from screenings, films where screeningID = ? and screenings.filmID = films.filmID").all(screeningID);
+    screening = db.prepare("select films.filmID, screenings.screeningID, rooms.capacity - screenings.seatsBooked as seatsRemaining, title, rating, showtime, description, poster from screenings, films, rooms where screenings.screeningID = ? and screenings.filmID = films.filmID and screenings.roomID = rooms.roomID;").all(screeningID);
     if (screening.length === 0) {
         res.redirect("/");
         return;
