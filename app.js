@@ -161,7 +161,7 @@ app.post('/add-new-movie', function(req, res){
 
     console.table(req.body);
 
-    db.prepare("INSERT INTO films VALUES (?,?,?,?,?)").run(filmID, req.body.title, req.body.year, req.body.rating, req.body.description);
+    db.prepare("INSERT INTO films VALUES (?,?,?,?,?,?,?)").run(filmID, req.body.title, req.body.year, req.body.rating,req.body.description, req.body.poster, req.body.trailer, req.body.duration);
 
     res.redirect("/adminpanel");
 });
@@ -207,13 +207,39 @@ app.post('/add-screening', function(req, res){
     if (lastRow.length > 0) {
         screeningID = 1 + lastRow[0].screeningID;
     }
-    
-    let decCheck = db.prepare("SELECT roomID FROM rooms WHERE decomissioned=0 and roomID = ?").all(req.body.roomID);
+
+    //checks if room is deomissioned
+    let decCheck = db.prepare("SELECT roomID FROM rooms WHERE decomissioned=0 AND roomID = ?").all(req.body.roomID);
 
     console.log(decCheck);
     console.table(decCheck);
     if (decCheck.length === 0) {
         return;
+    }
+
+    //supposed to check if there is another screening going on at that time
+    let screeningCheck = db.prepare("SELECT showtime FROM screenings WHERE roomID=?").all(req.body.roomID);
+    let duration = db.prepare("SELECT duration FROM films WHERE filmID=?").all(req.body.filmID);
+    
+    let timeMinutesList = req.body.time.split(":");
+    let timeMinutes = 0;
+    
+    for(let x = 0; x < screeningCheck.length; x++){
+        let showtime = screeningCheck[x].showtime.split(" ");
+        if(showtime[0] != req.body.date){
+            screeningCheck.pop[x];
+        }
+    }
+    
+    for(let x = 0; x < (+timeMinutesList[0]); x++){
+        timeMinutes += 60;
+    }
+    timeMinutes += timeMinutesList[1];
+
+    for(let x = 0; x < screeningCheck.length; x++){
+        if(timeMinutes < showtime[1] && showtime[1] > (timeMinutes+duration+20)){//adding 20 minutes so that the staff have time to clean the room
+            return;
+        }
     }
 
     //console.table(req.body);
