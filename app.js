@@ -54,7 +54,6 @@ app.get('/screenings', function (req, res) {
         rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity order by showtime;").all(film);
     } else {
         rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID order by showtime").all();
-
     }
 
     console.table(rows);
@@ -208,7 +207,7 @@ app.post('/add-screening', function(req, res){
         screeningID = 1 + lastRow[0].screeningID;
     }
 
-    //checks if room is deomissioned
+    //checks if room is decomissioned
     let decCheck = db.prepare("SELECT roomID FROM rooms WHERE decomissioned=0 AND roomID = ?").all(req.body.roomID);
 
     console.log(decCheck);
@@ -217,37 +216,50 @@ app.post('/add-screening', function(req, res){
         return;
     }
 
-    //supposed to check if there is another screening going on at that time
+    //supposed to check if there is another screening going on at that time    
+    //selects stuff
     let screeningCheck = db.prepare("SELECT showtime FROM screenings WHERE roomID=?").all(req.body.roomID);
-    let duration = db.prepare("SELECT duration FROM films WHERE filmID=?").all(req.body.filmID);
-    
+    let durationObj = db.prepare("SELECT duration FROM films WHERE filmID=?").all(req.body.filmID);
+
     let timeMinutesList = req.body.time.split(":");
     let timeMinutes = 0;
     
+    //gets rid off all of the screenings that aren't at the day you want to add the movie to
     for(let x = 0; x < screeningCheck.length; x++){
         let showtime = screeningCheck[x].showtime.split(" ");
+        
         if(showtime[0] != req.body.date){
             screeningCheck.pop[x];
         }
     }
     
-    for(let x = 0; x < (+timeMinutesList[0]); x++){
+    //prepares the time check
+    console.log("Turning time to int---");
+    for(let x = 1; x < (+timeMinutesList[0]); x++){
         timeMinutes += 60;
     }
-    timeMinutes += timeMinutesList[1];
+    timeMinutes += +timeMinutesList[1];
 
     for(let x = 0; x < screeningCheck.length; x++){
-        if(timeMinutes < showtime[1] && showtime[1] > (timeMinutes+duration+20)){//adding 20 minutes so that the staff have time to clean the room
+        let showtimeScreeningCheck = screeningCheck[x].showtime.split(" ")[1].split(":");
+        let timeMinutesScreeningCheck = 0;
+
+        for(let x = 0; x < (+showtimeScreeningCheck[0]); x++){
+            timeMinutesScreeningCheck += 60;
+        }
+        timeMinutesScreeningCheck += +showtimeScreeningCheck[1];
+
+        if(timeMinutesScreeningCheck < timeMinutes && timeMinutes < (timeMinutesScreeningCheck+(+(durationObj[0].duration))+20)){//adding 20 minutes so that the staff have time to clean the room
+            
             return;
         }
     }
-
-    //console.table(req.body);
+    
     if(decCheck[0].roomID !== undefined){
         db.prepare("INSERT INTO screenings VALUES (?,?,?,?,?)").run(screeningID, req.body.filmID, req.body.roomID, 0, req.body.date+" "+req.body.time);
     }
     
-    res.redirect("/managementpanelScreening");
+    res.redirect("/managementpanelScreenings");
 });
 
 app.post('/remove-screening', function(req, res){
@@ -267,7 +279,7 @@ app.post('/remove-screening', function(req, res){
     //console.log();
     //console.table(req.body);
 
-    res.redirect("/managementpanelScreening");
+    res.redirect("/managementpanelScreenings");
 });
 
 app.post('/add-discount', function(req, res){
