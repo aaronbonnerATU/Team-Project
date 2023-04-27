@@ -5,7 +5,7 @@ quantityInput.addEventListener("input",updatePrice);
 
 function updatePrice(){
     const quantity = parseInt(quantityInput.value);
-    if (quantity > parseInt(quantityInput.max)) {
+    if (quantity > parseInt(quantityInput.max) || quantity < 0 || isNaN(quantity)) {
         quantityInput.value = quantityInput.max
         return;
     }
