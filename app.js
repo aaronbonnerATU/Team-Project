@@ -31,9 +31,9 @@ app.get('/films', function (req, res) {
     let searchTerm = req.query.search;
     let rows;
     if (searchTerm === undefined) {
-        rows = db.prepare("select films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity").all();
+        rows = db.prepare("select distinct films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity").all();
     } else {
-        rows = db.prepare("select films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity and (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
+        rows = db.prepare("select distinct films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity and (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
     }
     
     console.table(rows);
