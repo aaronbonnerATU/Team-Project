@@ -16,6 +16,7 @@ select{
 
 textarea{
     margin-bottom:3px;
+    resize: none;
 }
 
 h1{
