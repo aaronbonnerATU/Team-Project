@@ -96,3 +96,8 @@
   flex-direction: row;
   align-items: center;
 }
+
+.filmSummary {
+  height: auto;
+}
+

@@ -2,58 +2,110 @@
 @import url("films.css");
 
 
-
 #viewScreeningBanner {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100px;
+  gap: 0px;
+  background-color: rgb(27, 38, 97);
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.btn {
+  width: 200px;
+  height: 40px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
+  font-weight: 100;
+  background-color: rgb(27, 38, 97);
+  color: white;
+  box-shadow: 0px 0px 0px 1px white inset;
+}
+
+#details {
+  padding: 20px;
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#details > img {
+  min-width: 200px;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 350px;
+
+  height: auto;
+  align-self: start;
+}
+
+#detailsOuter {
+  display: flex;
+  flex-direction: column;
+}
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+
+}
+
+td,
+th {
+  border: 2px solid black;
+  text-align: left;
+  padding: 20px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
+td:last-child {
+  width: auto;
+}
+
+th:last-child {
+  width: auto;
+}
+
+/*Button on hover & focus */
+.btn:hover,
+.btn:focus {
+  background-color: #D3D3D3;
+}
+
+h2 {
+  text-align: center;
+  min-height: 50px;
+  border-bottom: 2px solid rgb(8, 1, 48);
+}
+
+@media screen and (max-width: 870px) {
+  #details {
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    height: 100px;
-    background-color: rgb(27, 38, 97);
-    color: white;
-    font-size: 20px;
-    font-family: sans-serif;
+    justify-content: center;
+  }
+
+  #details > img {
+    align-self: center;
+    width: 90%;
+    max-width: 90%;
   }
 
   .btn {
-    width: 200px;
-    height: 40px;
-    font-family:'Times New Roman', Times, serif;
-    font-size:16px;
-    font-weight: 100;
-    background-color: rgb(27, 38, 97);
-    color: white;
-    box-shadow:0px 0px 0px 1px white inset;
+    width: 120px;
   }
 
-#detailsOuter {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-  }
-
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 80%;
-    margin-left: 10%;
-    margin-top: 16px;
-  }
-  
-  td, th {
-    border: 2px solid black;
-    text-align: left;
-    padding: 20px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-
-      /*Button on hover & focus */
-      .btn:hover, .btn:focus {
-        background-color: #D3D3D3;
-      }
+}
