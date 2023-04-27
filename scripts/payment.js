@@ -7,6 +7,7 @@ function updatePrice(){
     const quantity = parseInt(quantityInput.value);
     if (quantity > parseInt(quantityInput.max)) {
         quantityInput.value = quantityInput.max
+        return;
     }
     const totalPrice = quantity * 8;
     priceParagraph.textContent = "Ticket Price: " + totalPrice + " Euro";
