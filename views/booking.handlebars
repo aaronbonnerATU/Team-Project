@@ -11,9 +11,10 @@
 
     <div class="filmDescriptionContainer">
       <div id="filmTitleRating">
-        <p class="filmTitle">{{title}}</p>
+        <p class="filmTitle">{{title}}({{year}})</p>
         <img src="images/{{rating}} Rating.png" class="imgRating">
       </div>
+      <p class="filmYear">{{duration}}</p>
       <p class="filmSummary">{{description}}</p>
       <a href="screenings?film={{filmID}}"><button id="makeBooking" class="btn">Book Movie</button></a>
     </div>

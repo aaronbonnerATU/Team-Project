@@ -31,9 +31,9 @@ app.get('/films', function (req, res) {
     let searchTerm = req.query.search;
     let rows;
     if (searchTerm === undefined) {
-        rows = db.prepare("select * from films").all();
+        rows = db.prepare("select distinct films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity").all();
     } else {
-        rows = db.prepare("select * from films where (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
+        rows = db.prepare("select distinct films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity and (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
     }
     
     console.table(rows);
@@ -53,7 +53,7 @@ app.get('/screenings', function (req, res) {
     if (film !== undefined) {
         rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity order by showtime;").all(film);
     } else {
-        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID order by showtime").all();
+        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID, showtime").all();
     }
 
     console.table(rows);
@@ -64,6 +64,7 @@ app.get('/screenings', function (req, res) {
 app.get('/book', function (req, res) {
     let filmID = req.query.film;
     let film;
+    console.log(filmID)
 
     film = db.prepare("select * from films where filmid = ?").all(filmID);
     if (film.length === 0) {
@@ -73,13 +74,19 @@ app.get('/book', function (req, res) {
 
     screenings = db.prepare("select * from screenings where filmid = ?").all(filmID);
     if (screenings.length === 0) {
-        //res.send("Error: No screenings for this film.");
-        //return;
+        res.send("Error: No screenings for this film.");
+        return;
     }
 
     //res.send(screenings);
 
-    res.render("booking", film[0]);
+    film = film[0];
+    let filmHrs = Math.floor(film.duration / 60);
+    let filmMins = film.duration % 60;
+
+    film.duration = filmHrs + "hrs " + (filmMins < 10 ? "0" : "") + filmMins + "mins"
+    console.log(film.duration)
+    res.render("booking", film);
 });
 
 
