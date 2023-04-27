@@ -1,37 +1,41 @@
-   
-<link rel= "stylesheet" href ="styles/viewscreening.css">
+<link rel="stylesheet" href="styles/viewscreening.css">
 
-    <div id="viewScreeningBanner">
-        <h1>MAKE A BOOKING</h1>
-    </div>
-    <div id="detailsOuter">
-            {{#if screenings}}
-            <table>
+<div id="viewScreeningBanner">
+    <h1>MAKE A BOOKING</h1>
+</div>
+<div id="detailsOuter">
+
+    <h2>{{title}}</h2>
+
+    <div id="details">
+        <img src="images/posters/{{poster}}">
+        {{#if screenings}}
+        <table>
             <tr>
                 <th>Screen</th>
-                <th>Movie Name</th>
                 <th>Date</th>
                 <th>Available Seats</th>
                 <th>Price</th>
                 <th></th>
-                
             </tr>
             {{#each screenings}}
-            
+
             <tr>
                 <td>Screen {{roomID}}</td>
-                <td>{{title}}</td>
                 <td>{{showtime}}</td>
                 <td>{{placesLeft}} Remaining</td>
                 <td>€8.00</td>
-                
-                <td><a href="payment?screening={{screeningID}}"><button id="makeBooking" class="btn">Book Movie</button></a></td>
+
+                <td><a href="payment?screening={{screeningID}}"><button id="makeBooking" class="btn">Book
+                            Movie</button></a></td>
             </tr>
             {{/each}}
             {{else}}
             <br>
-                <h2>No screenings!</h2>
+            <h2>No screenings!</h2>
             {{/if}}
-      </table>
+        </table>
     </div>
-    
+
+
+</div>
