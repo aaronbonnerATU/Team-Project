@@ -281,7 +281,7 @@ app.post('/remove-screening', function(req, res){
 
     res.redirect("/managementpanelScreenings");
 });
-
+/*
 app.post('/add-discount', function(req, res){
     db.prepare("INSERT INTO discounts VALUES (?,?)").run(req.body.discountCodeINP, req.body.discountFractionINP);
     res.redirect("/managementpanelDiscount");
@@ -291,6 +291,7 @@ app.post('/remove-discount', function(req, res){
     db.prepare("DELETE FROM discounts WHERE code=?").run(req.body.discountCodeDelINP);
     res.redirect("/managementpanelDiscount");
 });
+*/
 //---------------------------
 //management and admin handlebars
 
@@ -335,6 +336,7 @@ app.get("/managementpanelDerecomission",function(req, res){
     res.render("managementpanelDerecomission", {rooms: r});
 });
 
+/*
 app.get("/managementpanelDiscount",function(req, res){
     let d = db.prepare("SELECT * FROM discounts").all();
     d.forEach((el) => {el.fractionDiscount = `${el.fractionDiscount * 100}%`});
@@ -342,7 +344,7 @@ app.get("/managementpanelDiscount",function(req, res){
     console.log({discounts: d});
     res.render("managementpanelDiscount", {discounts: d});
 });
-
+*/
 
 //---------------------------
 
