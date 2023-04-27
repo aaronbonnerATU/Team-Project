@@ -69,7 +69,7 @@ h3{
 .disp1{
     border: 1px black solid;
     width:100px;
-    height:20px;
+    height:60px;
     color:white;
     background-color:rgb(60, 96, 150);
 }
@@ -77,7 +77,7 @@ h3{
 .disp2{
     border: 1px black solid;
     width:100px;
-    height:20px;
+    height:60px;
     color:white;
     background-color:rgb(60, 101, 145);
 }
