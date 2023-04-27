@@ -31,9 +31,9 @@ app.get('/films', function (req, res) {
     let searchTerm = req.query.search;
     let rows;
     if (searchTerm === undefined) {
-        rows = db.prepare("select distinct films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity").all();
+        rows = db.prepare("select films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity").all();
     } else {
-        rows = db.prepare("select distinct films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity and (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
+        rows = db.prepare("select films.filmID as filmID, films.poster as poster, films.title as title, films.year as year, films.rating as rating, films.description as description from films, screenings, rooms where films.filmID = screenings.filmID and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity and (title like '%'||?1||'%' or description like '%'||?1||'%' or year = ?1 or rating = ?1)").all({1: searchTerm});
     }
     
     console.table(rows);
@@ -51,14 +51,14 @@ app.get('/screenings', function (req, res) {
     console.log(film);
     let rows = [];
     if (film !== undefined) {
-        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity order by showtime;").all(film);
+        rows = db.prepare("select poster, title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and films.filmID = ? and screenings.roomID = rooms.roomID and screenings.seatsBooked < rooms.capacity order by showtime;").all(film);
     } else {
-        rows = db.prepare("select title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID, showtime").all();
+        rows = db.prepare("select poster, title, showtime, (rooms.capacity - screenings.seatsBooked), screeningID as placesLeft, rooms.roomID, screeningID from films, screenings, rooms where screenings.filmID = films.filmID and screenings.roomID = rooms.roomID order by films.filmID, showtime").all();
     }
 
     console.table(rows);
-
-    res.render("viewscreening", {screenings: rows});
+    console.log(rows[0].title)
+    res.render("viewscreening", {screenings: rows, title: rows[0].title, poster: rows[0].poster});
 });
 
 app.get('/book', function (req, res) {
