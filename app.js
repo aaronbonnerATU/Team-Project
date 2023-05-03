@@ -228,27 +228,30 @@ app.post('/add-screening', function(req, res){
     let screeningCheck = db.prepare("SELECT showtime FROM screenings WHERE roomID=?").all(req.body.roomID);
     let durationObj = db.prepare("SELECT duration FROM films WHERE filmID=?").all(req.body.filmID);
 
+    console.table(screeningCheck);
+
     let timeMinutesList = req.body.time.split(":");
     let timeMinutes = 0;
-    
+    let newScreenCheckList = [];
+
     //gets rid off all of the screenings that aren't at the day you want to add the movie to
     for(let x = 0; x < screeningCheck.length; x++){
-        let showtime = screeningCheck[x].showtime.split(" ");
-        
-        if(showtime[0] != req.body.date){
-            screeningCheck.pop[x];
+        let showtimeDel = screeningCheck[x].showtime.split(" ");
+        if(showtimeDel[0] == req.body.date){
+            newScreenCheckList.push(screeningCheck[x]);
         }
     }
     
+    console.table(newScreenCheckList);
+
     //prepares the time check
-    console.log("Turning time to int---");
-    for(let x = 1; x < (+timeMinutesList[0]); x++){
+    for(let x = 0; x < (+timeMinutesList[0]); x++){
         timeMinutes += 60;
     }
     timeMinutes += +timeMinutesList[1];
-
-    for(let x = 0; x < screeningCheck.length; x++){
-        let showtimeScreeningCheck = screeningCheck[x].showtime.split(" ")[1].split(":");
+    
+    for(let x = 0; x < newScreenCheckList.length; x++){
+        let showtimeScreeningCheck = newScreenCheckList[x].showtime.split(" ")[1].split(":");
         let timeMinutesScreeningCheck = 0;
 
         for(let x = 0; x < (+showtimeScreeningCheck[0]); x++){
@@ -256,8 +259,11 @@ app.post('/add-screening', function(req, res){
         }
         timeMinutesScreeningCheck += +showtimeScreeningCheck[1];
 
-        if(timeMinutesScreeningCheck < timeMinutes && timeMinutes < (timeMinutesScreeningCheck+(+(durationObj[0].duration))+20)){//adding 20 minutes so that the staff have time to clean the room
-            
+        //console.log(timeMinutesScreeningCheck +" < "+ timeMinutes +" && "+ timeMinutes +" < "+ "("+timeMinutesScreeningCheck+"+"+durationObj[0].duration+"+20)");
+        //console.log(timeMinutesScreeningCheck +" < "+ timeMinutes +" && "+ timeMinutes +" < "+ (timeMinutesScreeningCheck+durationObj[0].duration+20));
+        //console.log(timeMinutesScreeningCheck < timeMinutes && timeMinutes < (timeMinutesScreeningCheck+durationObj[0].duration+20));
+
+        if(timeMinutesScreeningCheck < timeMinutes && timeMinutes < (timeMinutesScreeningCheck+durationObj[0].duration+20)){//adding 20 minutes so that the staff have time to clean the room
             return;
         }
     }
