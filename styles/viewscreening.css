@@ -17,7 +17,7 @@
 }
 
 .btn {
-  width: 200px;
+  width: 100px;
   height: 40px;
   font-family: 'Times New Roman', Times, serif;
   font-size: 16px;
@@ -102,10 +102,6 @@ h2 {
     align-self: center;
     width: 90%;
     max-width: 90%;
-  }
-
-  .btn {
-    width: 120px;
   }
 
 }
